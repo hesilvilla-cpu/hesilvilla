@@ -1,0 +1,95 @@
+====================================================================
+               HESIL VILLA - DETAILS FORM / TEMPLATE
+====================================================================
+Instructions: Please fill in or edit the information below. 
+Save this file once completed, and share it back!
+
+--------------------------------------------------------------------
+1. VILLA BRANDING & OVERVIEW
+--------------------------------------------------------------------
+Villa Name        : Hesil Villa
+Tagline / Slogan  : (e.g., "Luxury Beachside Villa in Alappuzha" or leave blank)
+Short Description : (Brief intro about the villa experience, beach vibe, serene atmosphere)
+
+--------------------------------------------------------------------
+2. CONTACT & BOOKING DETAILS
+--------------------------------------------------------------------
+Phone Number      : 
+WhatsApp Number   : 
+Email Address     : 
+Full Address      : (e.g., Beach Road, Near Alappuzha Lighthouse, Alappuzha, Kerala - 688007)
+Google Maps Link  : (Paste your Google Maps location URL or embed link)
+
+--------------------------------------------------------------------
+3. ACCOMMODATION 1: LOWER BHK 
+   (Layout: 1 Bedroom + 1 Bathroom + 1 Kitchen)
+--------------------------------------------------------------------
+Unit Name         : Lower BHK
+Max Guest Capacity: (e.g., 2 to 4 guests)
+Bed Type          : (e.g., 1 King Size Bed / Extra mattress available)
+Key Features      : (e.g., Ground floor, Garden access, AC, Private Kitchen)
+Nightly Rate      : (e.g., ₹XXXX per night / or "Contact for Best Rate")
+
+--------------------------------------------------------------------
+4. ACCOMMODATION 2: UPPER BHK 
+   (Layout: 1 Bedroom + 1 Bathroom + 1 Kitchen)
+--------------------------------------------------------------------
+Unit Name         : Upper BHK
+Max Guest Capacity: (e.g., 2 to 4 guests)
+Bed Type          : (e.g., 1 King Size Bed / Extra mattress available)
+Key Features      : (e.g., Ocean breeze balcony, Upper terrace view, AC, Private Kitchen)
+Nightly Rate      : (e.g., ₹XXXX per night / or "Contact for Best Rate")
+
+--------------------------------------------------------------------
+5. ACCOMMODATION 3: FULL VILLA (ENTIRE PROPERTY)
+   (Rent both Upper & Lower units together)
+--------------------------------------------------------------------
+Max Guest Capacity: (e.g., Up to 8 guests)
+Key Features      : (e.g., Complete privacy, 2 Bedrooms, 2 Bathrooms, 2 Kitchens, Exclusive garden & terrace)
+Nightly Rate      : (e.g., ₹XXXX per night / or "Contact for Group Discount")
+
+--------------------------------------------------------------------
+6. AMENITIES & FACILITIES (Mark YES / NO or Add details)
+--------------------------------------------------------------------
+[ ] Air Conditioning (AC) in Bedrooms : [ YES / NO ]
+[ ] Free High-Speed Wi-Fi             : [ YES / NO ]
+[ ] Private Kitchen / Cooking Utensils: [ YES / NO ]
+[ ] Free Private Car Parking          : [ YES / NO ]
+[ ] Power Backup / Inverter           : [ YES / NO ]
+[ ] Hot Water Geyser                  : [ YES / NO ]
+[ ] Caretaker / Housekeeping Service  : [ YES / NO ]
+[ ] Breakfast / Meals Available       : [ YES / NO ]
+[ ] Beach Access / Walking Distance   : [ YES / NO ]
+[ ] Television (Smart TV)             : [ YES / NO ]
+Other Amenities to add                : 
+
+--------------------------------------------------------------------
+7. NEARBY ATTRACTIONS & DISTANCES
+--------------------------------------------------------------------
+Alappuzha Beach             : (e.g., 300 meters / 2 min walk)
+Alappuzha Lighthouse        : (e.g., 500 meters)
+Punnamada Backwater Jetty   : (e.g., 4.5 km)
+Alappuzha Railway Station   : (e.g., 2.5 km)
+Cochin Airport (COK)        : (e.g., 82 km)
+Other spots / Restaurants   : 
+
+--------------------------------------------------------------------
+8. EXTERNAL OTA BOOKING LINKS (If applicable, paste URL links)
+--------------------------------------------------------------------
+Airbnb Link      : 
+Booking.com Link : 
+MakeMyTrip Link  : 
+Agoda / Other    : 
+
+--------------------------------------------------------------------
+9. PHOTO INVENTORY (Optional Notes for Photos)
+--------------------------------------------------------------------
+Folder Location: Save your photos inside "d:\Coding\Hesil Villa\public\images\"
+Please list your photo names or what each photo shows:
+- Photo 1 (Exterior / Front view): 
+- Photo 2 (Upper BHK Bedroom): 
+- Photo 3 (Upper BHK Balcony/Terrace): 
+- Photo 4 (Lower BHK Bedroom): 
+- Photo 5 (Lower BHK Kitchen): 
+- Photo 6 (Alappuzha Beach / Surroundings): 
+====================================================================
