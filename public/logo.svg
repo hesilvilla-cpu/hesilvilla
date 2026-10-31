@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" fill="none">
+  <!-- Minimalist Architectural Villa & Botanical Leaf Motif -->
+  <g transform="translate(6, 8)">
+    <!-- Kerala Villa Roofline -->
+    <path
+      d="M4 28L22 13L40 28"
+      stroke="#263D32"
+      stroke-width="2.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <!-- Villa Body Frame -->
+    <path
+      d="M10 28V38H34V28"
+      stroke="#263D32"
+      stroke-width="2.25"
+      stroke-linecap="round"
+    />
+    <!-- Subtle Botanical Leaf Stem emerging through roofline apex -->
+    <path
+      d="M22 13C22 8 26 5 29 5C29 8 25 11 22 13Z"
+      fill="#71866B"
+    />
+    <!-- Central Verandah Doorway -->
+    <path
+      d="M19 29H25V38H19V29Z"
+      stroke="#263D32"
+      stroke-width="1.75"
+      stroke-linejoin="round"
+    />
+  </g>
+
+  <!-- Refined Editorial Wordmark -->
+  <text
+    x="62"
+    y="32"
+    font-family="'Cormorant Garamond', Georgia, serif"
+    font-size="22"
+    font-weight="500"
+    letter-spacing="0.18em"
+    fill="#263D32"
+  >HESIL VILLA</text>
+  <text
+    x="63"
+    y="44"
+    font-family="'Plus Jakarta Sans', system-ui, sans-serif"
+    font-size="8"
+    font-weight="500"
+    letter-spacing="0.32em"
+    fill="#71866B"
+  >ALAPPUZHA</text>
+</svg>
