@@ -1,36 +1,10 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { homestayConfig } from '../config/homestayConfig';
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(null);
-
-  const faqs = [
-    {
-      question: "What is the accommodation layout at Hesil Villa?",
-      answer:
-        "Hesil Villa consists of two independent, self-contained 1BHK suites across two floors: the Upper BHK (first floor with private terrace balcony) and the Lower BHK (ground floor with garden verandah access). Each suite features its own air-conditioned master bedroom, ensuite modern bathroom, and private kitchen. Guests can reserve either suite individually or book the Entire Villa for exclusive private buyout.",
-    },
-    {
-      question: "What cooking facilities are included in the private kitchens?",
-      answer:
-        "Both suites include a dedicated private kitchen equipped with a gas cooktop, refrigerator, cookware, and dining essentials, allowing guests to brew fresh morning tea or prepare meals at their leisure.",
-    },
-    {
-      question: "What are the check-in and check-out timings?",
-      answer:
-        "Check-in begins at 2:00 PM and check-out is by 11:00 AM. If you require early arrival or late departure, please coordinate directly with the host on WhatsApp subject to room availability.",
-    },
-    {
-      question: "Is vehicle parking available on the premises?",
-      answer:
-        "Yes, secure private on-premises parking is available for guest cars and two-wheelers.",
-    },
-    {
-      question: "How are stay enquiries and bookings handled?",
-      answer:
-        "Enquiries are managed directly with the host via WhatsApp with zero platform commissions. Rates and dates are verified personally with you before finalizing your stay.",
-    },
-  ];
+  const { faqs } = homestayConfig;
 
   const toggleFaq = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -43,11 +17,14 @@ export default function FaqSection() {
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-12">
           <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#71866B] font-semibold block mb-2">
-            Common Inquiries
+            Essential Details
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl text-[#263D32] font-normal leading-tight">
             Frequently Asked Questions
           </h2>
+          <p className="font-sans text-xs sm:text-sm text-[#52574E] font-light mt-2">
+            Factual answers regarding timings, capacities, parking, and stay arrangements.
+          </p>
         </div>
 
         {/* Minimal Accordion List */}

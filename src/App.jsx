@@ -4,9 +4,10 @@ import HeroSection from './components/HeroSection';
 import EditorialAbout from './components/EditorialAbout';
 import Accommodations from './components/Accommodations';
 import EditorialGallery from './components/EditorialGallery';
+import GardenExperience from './components/GardenExperience';
 import AmenitiesSection from './components/AmenitiesSection';
-import FaqSection from './components/FaqSection';
 import LocationSection from './components/LocationSection';
+import FaqSection from './components/FaqSection';
 import FinalBookingCTA from './components/FinalBookingCTA';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
@@ -15,6 +16,9 @@ import LightboxModal from './components/LightboxModal';
 export default function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [bookingInitialData, setBookingInitialData] = useState(null);
+
+  // Gallery active category state (supports synchronization with Accommodation "View photographs")
+  const [activeGalleryCategory, setActiveGalleryCategory] = useState('all');
 
   // Lightbox State supporting gallery sequence navigation
   const [lightboxState, setLightboxState] = useState({
@@ -80,39 +84,56 @@ export default function App() {
     setLightboxState((prev) => ({ ...prev, isOpen: false }));
   };
 
+  // Accommodation "View photographs" interaction
+  const handleViewAccommodationPhotographs = (galleryTag) => {
+    setActiveGalleryCategory(galleryTag);
+    const galleryElement = document.getElementById('gallery');
+    if (galleryElement) {
+      galleryElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F4F1E7] text-[#343831] font-sans selection:bg-[#263D32] selection:text-[#F4F1E7]">
       {/* 1. Header Navigation */}
       <Navbar onOpenBooking={handleOpenBooking} />
 
-      {/* 2. Hero */}
+      {/* 2. Hero Section */}
       <HeroSection onOpenBooking={handleOpenBooking} />
 
-      {/* 3. Short Introduction */}
+      {/* 3. Short Introduction / Property Story */}
       <EditorialAbout />
 
-      {/* 4. The Villa (Upper BHK, Lower BHK, Entire Villa) */}
+      {/* 4. Accommodation Selector */}
       <Accommodations
         onOpenBookingWithRoom={handleOpenBookingWithRoom}
         onOpenLightbox={handleOpenSingleLightbox}
+        onViewPhotographs={handleViewAccommodationPhotographs}
       />
 
-      {/* 5. Gallery */}
-      <EditorialGallery onOpenGalleryLightbox={handleOpenGalleryLightbox} />
+      {/* 5. Mosaic Photo Gallery */}
+      <EditorialGallery
+        activeCategory={activeGalleryCategory}
+        onSelectCategory={setActiveGalleryCategory}
+        onOpenGalleryLightbox={handleOpenGalleryLightbox}
+      />
 
-      {/* 6. Essential Amenities */}
+      {/* 6. Garden and Stay Experience */}
+      <GardenExperience />
+
+      {/* 7. Essential Amenities */}
       <AmenitiesSection />
 
-      {/* 7. Frequently Asked Questions */}
-      <FaqSection />
-
-      {/* 8. Location */}
+      {/* 8. Location & Connectivity */}
       <LocationSection />
 
-      {/* 9. Booking / Enquiry */}
+      {/* 9. Frequently Asked Questions */}
+      <FaqSection />
+
+      {/* 10. Enquiry Section */}
       <FinalBookingCTA onOpenBooking={handleOpenBooking} />
 
-      {/* 10. Footer */}
+      {/* 11. Footer */}
       <Footer />
 
       {/* Direct WhatsApp Enquiry Modal */}
@@ -123,7 +144,7 @@ export default function App() {
         initialData={bookingInitialData}
       />
 
-      {/* Minimal Fullscreen Gallery Lightbox */}
+      {/* Fullscreen Gallery Lightbox */}
       <LightboxModal
         isOpen={lightboxState.isOpen}
         onClose={handleCloseLightbox}

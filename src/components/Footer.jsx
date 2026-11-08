@@ -1,11 +1,13 @@
 import React from 'react';
-import { MessageCircle, Phone, MapPin } from 'lucide-react';
+import { MessageCircle, Phone, MapPin, Navigation } from 'lucide-react';
 import Logo from './Logo';
 import { homestayConfig } from '../config/homestayConfig';
 
 const currentYear = new Date().getFullYear();
 
 export default function Footer() {
+  const { contact } = homestayConfig;
+
   return (
     <footer className="bg-[#1A2B23] text-[#F4F1E7] py-16 border-t border-[#263D32]">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
@@ -16,56 +18,81 @@ export default function Footer() {
           <div className="max-w-sm">
             <Logo variant="light" className="mb-4" />
             <p className="text-xs font-sans text-[#F4F1E7]/75 font-light leading-relaxed">
-              A peaceful modern homestay in Alappuzha, Kerala. Independent 1BHK suites with private kitchens in a quiet coastal neighborhood.
+              Your own little escape in Kerala. A private, quiet homestay in Alappuzha with AC suites, budget cottages, garden fish pond, outdoor leisure spaces, and the warmth of a Kerala home.
             </p>
           </div>
 
-          {/* Location & Direct Contact */}
+          {/* Location & Direct Contact (Both Confirmed Numbers) */}
           <div className="space-y-3 text-xs font-sans text-[#F4F1E7]/85 font-light">
             <div className="flex items-start gap-2.5">
               <MapPin className="w-4 h-4 text-[#71866B] shrink-0 mt-0.5" />
-              <span>Alappuzha (Alleppey), Kerala, India</span>
+              <span>Kanichukulangara, Mararikulam North, Alappuzha, Kerala</span>
             </div>
 
-            <div className="flex items-center gap-2.5">
-              <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-              {homestayConfig.contact.whatsappNumber ? (
+            {/* Primary Host WhatsApp & Call */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5">
+                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
                 <a
-                  href={`https://wa.me/${homestayConfig.contact.whatsappNumber}`}
+                  href={contact.primaryWhatsappUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-emerald-300 transition-colors"
                 >
-                  WhatsApp: {homestayConfig.contact.phoneDisplay}
+                  WhatsApp: {contact.primaryPhoneDisplay}
                 </a>
-              ) : (
-                <span className="text-[#F4F1E7]/70 italic">
-                  WhatsApp: Pending owner configuration
-                </span>
-              )}
+              </div>
+              <span className="text-white/30">•</span>
+              <a
+                href={`tel:${contact.primaryPhone}`}
+                className="hover:text-white transition-colors flex items-center gap-1"
+              >
+                <Phone className="w-3 h-3 text-[#71866B]" />
+                <span>Call</span>
+              </a>
             </div>
 
-            <div className="flex items-center gap-2.5">
-              <Phone className="w-4 h-4 text-[#71866B] shrink-0" />
-              {homestayConfig.contact.phone ? (
+            {/* Secondary Host WhatsApp & Call */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5">
+                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
                 <a
-                  href={`tel:${homestayConfig.contact.phone}`}
-                  className="hover:text-white transition-colors"
+                  href={contact.secondaryWhatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-emerald-300 transition-colors"
                 >
-                  Call: {homestayConfig.contact.phoneDisplay}
+                  WhatsApp: {contact.secondaryPhoneDisplay}
                 </a>
-              ) : (
-                <span className="text-[#F4F1E7]/70 italic">
-                  Phone: Pending owner configuration
-                </span>
-              )}
+              </div>
+              <span className="text-white/30">•</span>
+              <a
+                href={`tel:${contact.secondaryPhone}`}
+                className="hover:text-white transition-colors flex items-center gap-1"
+              >
+                <Phone className="w-3 h-3 text-[#71866B]" />
+                <span>Call</span>
+              </a>
+            </div>
+
+            {/* Google Maps Directions */}
+            <div className="flex items-center gap-2.5 pt-1">
+              <Navigation className="w-4 h-4 text-[#C9AE8C] shrink-0" />
+              <a
+                href={contact.googleMapsDirectLink}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white transition-colors underline underline-offset-2"
+              >
+                Directions on Google Maps
+              </a>
             </div>
           </div>
 
           {/* Essential Links */}
           <div className="flex flex-col gap-2.5 text-xs font-sans uppercase tracking-[0.16em] text-[#F4F1E7]/80">
             <a href="#home" className="hover:text-white transition-colors">Home</a>
-            <a href="#villa" className="hover:text-white transition-colors">The Villa</a>
+            <a href="#villa" className="hover:text-white transition-colors">Accommodations</a>
             <a href="#gallery" className="hover:text-white transition-colors">Gallery</a>
             <a href="#location" className="hover:text-white transition-colors">Location</a>
           </div>
@@ -75,7 +102,7 @@ export default function Footer() {
         {/* Bottom Line */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-sans text-[#F4F1E7]/50 gap-3">
           <p>© {currentYear} Hesil Villa. All rights reserved.</p>
-          <p>Alappuzha, Kerala</p>
+          <p>Alappuzha (Alleppey), Kerala, India</p>
         </div>
 
       </div>

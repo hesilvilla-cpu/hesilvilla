@@ -1,529 +1,590 @@
 /**
- * HESIL VILLA - NATURE-INSPIRED BOUTIQUE HOMESTAY CONFIGURATION
+ * HESIL VILLA - NATURE-INSPIRED PRIVATE KERALA HOMESTAY CONFIGURATION
  * 
- * Central configuration file for property details, accommodations, pricing,
- * curated gallery, nearby attractions, and booking channels.
+ * Central configuration file for property details, accommodations, confirmed pricing,
+ * curated gallery, verified nearby attractions, policies, and direct booking channels.
  * 
- * Real property photographs can be saved into `/public/images/` and easily mapped below.
+ * Confirmed Host Contacts:
+ * Primary WhatsApp & Call: +91 75105 19751 (https://wa.me/917510519751)
+ * Secondary WhatsApp & Call: +91 94977 31378 (https://wa.me/919497731378)
+ * Google Maps Link: https://maps.app.goo.gl/GZz7cF5FMcsFXw5u6?g_st=ac (Confirmed)
  */
 
 export const homestayConfig = {
   // Brand & Identity
   brand: {
     name: "Hesil Villa",
-    subName: "Boutique Homestay",
-    headline: "Stay close to nature. Feel at home.",
-    editorialLine: "A little closer to the slower side of Kerala.",
-    tagline: "Stay close to nature. Feel at home.",
+    subName: "Private Kerala Homestay",
+    headline: "Your own little escape in Kerala.",
+    tagline: "Your own little escape in Kerala.",
+    supportingDescription:
+      "Surrounded by greenery, with a peaceful garden, a fish pond and spaces to sit, play and unwind, Hesil Villa offers a private stay with the warmth of a Kerala home.",
     locationLabel: "ALAPPUZHA, KERALA, INDIA",
-    shortDescription:
-      "Discover a peaceful modern stay in Alappuzha, thoughtfully designed for comfort, privacy and meaningful moments.",
-    longPhilosophy:
-      "Tucked into a tranquil coastal residential setting surrounded by palms and natural greenery, Hesil Villa offers the gentle pace of authentic Kerala life. Two independent 1BHK suites—each with its own private kitchen, master bedroom, and ensuite bathroom—provide the privacy of a private residence with the warmth of genuine local hospitality.",
+    shortStory:
+      "Located in a quieter, slightly interior residential area of Alappuzha, away from crowded tourist spots, Hesil Villa is surrounded by trees and greenery within an enclosed private compound. Ideal for families, couples and groups who value privacy, personal space, and unhurried days.",
   },
 
-  // Geographic Coordinates & Location Details
-  // Verified Property Coordinates: 9.635318125878603, 76.307138423238
-  coordinates: {
-    latitude: 9.635318125878603,
-    longitude: 76.307138423238,
-  },
-
-  // Contact Information
-  // LAUNCH BLOCKER: Real phone & WhatsApp numbers must be supplied by the property owner.
-  // Set to null to prevent placeholder dummy numbers from being used in functional booking links.
+  // Contact Information (Both Confirmed Numbers)
   contact: {
-    phone: null, // OWNER INPUT REQUIRED: e.g., "+91 XXXXX XXXXX"
-    phoneDisplay: "Host Number Pending Configuration",
-    whatsappNumber: null, // OWNER INPUT REQUIRED: Numbers only with country code (e.g., "91XXXXXXXXXX")
-    email: "stay@hesilvilla.com", // OWNER INPUT REQUIRED: Verify active email
+    primaryPhone: "+917510519751",
+    primaryPhoneDisplay: "+91 75105 19751",
+    primaryWhatsapp: "917510519751",
+    primaryWhatsappUrl: "https://wa.me/917510519751",
+
+    secondaryPhone: "+919497731378",
+    secondaryPhoneDisplay: "+91 94977 31378",
+    secondaryWhatsapp: "919497731378",
+    secondaryWhatsappUrl: "https://wa.me/919497731378",
+
+    // Convenient list for selection in booking form and contact components
+    phoneList: [
+      {
+        id: "primary",
+        label: "Primary Host",
+        phone: "+917510519751",
+        display: "+91 75105 19751",
+        whatsappUrl: "https://wa.me/917510519751",
+        callUrl: "tel:+917510519751",
+      },
+      {
+        id: "secondary",
+        label: "Secondary Host",
+        phone: "+919497731378",
+        display: "+91 94977 31378",
+        whatsappUrl: "https://wa.me/919497731378",
+        callUrl: "tel:+919497731378",
+      },
+    ],
+
+    // Default primary links
+    whatsappUrl: "https://wa.me/917510519751",
+    callUrl: "tel:+917510519751",
+    phoneDisplay: "+91 75105 19751 / +91 94977 31378",
+
+    email: null, // No email address per confirmed instructions
     address: {
-      lane: "Coastal Road, Near Chettikad / Pathirappally",
-      area: "Alappuzha Coast",
+      area: "Kanichukulangara, Mararikulam North",
       city: "Alappuzha (Alleppey)",
       state: "Kerala",
-      pincode: "688521",
       country: "India",
     },
-    // Google Maps embed directly targeting coordinates 9.635318125878603, 76.307138423238
+    googleMapsDirectLink: "https://maps.app.goo.gl/GZz7cF5FMcsFXw5u6?g_st=ac",
     googleMapsEmbedUrl:
       "https://maps.google.com/maps?q=9.635318125878603,76.307138423238&hl=en&z=15&output=embed",
-    googleMapsDirectLink:
-      "https://www.google.com/maps/dir/?api=1&destination=9.635318125878603,76.307138423238",
-    instagram: null,
   },
 
-  // Check-in & Stay Policies
+  // Check-in & Stay Policies (Confirmed)
   policies: {
-    checkInTime: "02:00 PM",
-    checkOutTime: "11:00 AM",
-    cancellation: "Flexible 48-hour prior notification for direct WhatsApp bookings",
-    smoking: "Smoking is strictly restricted to outdoor garden and open terrace areas",
-    pets: "Please inquire in advance with our host",
-    quietHours: "10:00 PM – 07:00 AM to preserve neighborhood serenity",
+    checkInTime: "11:00 AM",
+    checkOutTime: "10:00 AM",
+    timingNote: "Check-in is at 11:00 AM and check-out is at 10:00 AM.",
+    earlyCheckInNote:
+      "Early check-in and late check-out may be possible depending on availability. Please contact the host in advance.",
+    ratesNotice: "Rates are per night. Contact us to confirm availability.",
+    kitchenNotice: "Basic kitchen amenities available. Induction stove usage: ₹200 extra.",
   },
 
-  // Accommodations (Upper BHK, Lower BHK, Entire Villa)
-  // Pricing Note: When price is null or unconfirmed, UI displays "Contact us for current rates."
+  // Accommodation Categories
+  accommodationCategories: [
+    { id: "suites", name: "Suites & Entire Villa" },
+    { id: "cottages", name: "Cottages" },
+  ],
+
+  // 5 Accommodation Options Across 2 Categories (Confirmed Details & Pricing)
   accommodations: [
     {
-      id: "upper-bhk",
-      name: "The Upper BHK",
-      tagline: "Ocean Breeze & Private Balcony Terrace",
-      subtitle: "Independent First Floor Residence",
-      description:
-        "Elevated amidst swaying coconut fronds, the Upper BHK offers natural cross-ventilation, refreshing coastal breezes, and an open terrace balcony. An independent 1BHK sanctuary complete with a restful master bedroom, private modern bathroom, and a fully equipped private kitchen.",
+      id: "upper-suite",
+      categoryGroup: "suites",
+      galleryTag: "upper-suite",
+      name: "Upper Suite",
+      tagline: "Upstairs Sanctuary with Balcony",
+      subtitle: "First Floor • 2 Bedrooms • AC • One Kitchen Upstairs",
+      floor: "Upstairs (First Floor)",
+      acType: "AC",
+      isAC: true,
+      pricePerNight: 3000,
+      priceDisplay: "₹3,000",
+      extraBedCharge: 400,
+      extraBedChargeDisplay: "₹400",
       capacity: {
-        ideal: "2 Adults",
-        max: "Up to 3 Guests (Extra mattress available on request)",
+        standard: 4,
+        maxExtraBeds: 2,
+        totalMax: 6,
+        label: "4 guests + up to 2 extra beds",
+        summary: "Accommodates 4 guests with up to 2 extra beds (₹400/bed)",
       },
-      bed: "1 King Bed + Terrace Lounger",
-      size: "approx. 480 sq.ft",
-      layout: "1 Air-Conditioned Bedroom + 1 Private Bathroom + 1 Private Kitchen + Private Balcony Terrace",
-      // Set amount to null or a string. If null, displays "Contact us for current rates."
-      price: {
-        amount: null, // Configurable: e.g. "₹2,800" or null
-        period: "per night",
-        unconfirmedText: "Contact us for current rates.",
-        note: "Direct booking rate • Seasonal adjustments apply",
-      },
+      bed: "2 Bedrooms Upstairs with King & Queen Beds",
+      layout: "2 AC Bedrooms + 1 Bathroom + 1 Dedicated Kitchen + Balcony Terrace",
+      kitchenNote: "One kitchen available upstairs for guest use",
+      description:
+        "Located on the first floor, the Upper Suite features two air-conditioned bedrooms, one dedicated kitchen, and an airy balcony terrace overlooking the trees. Perfect for families and groups who appreciate privacy and comfort.",
       highlights: [
-        "Private open-air terrace with garden and canopy view",
-        "Quiet, individual air conditioning in bedroom",
-        "Fully equipped private kitchen for self-catering",
-        "Modern ensuite bathroom with 24/7 hot water geyser",
-        "High-speed fiber Wi-Fi",
-        "Complete upper-floor privacy with independent staircase access",
+        "Two air-conditioned bedrooms upstairs",
+        "One dedicated kitchen upstairs with basic amenities",
+        "Airy balcony terrace overlooking compound trees",
+        "Modern bathroom with 24/7 hot water geyser",
+        "High-speed Wi-Fi, television & automatic power backup",
+        "Complimentary breakfast included",
       ],
-      // Development placeholder - ready to swap in /public/images/
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=85",
+      // Local image target with reliable fallback
+      image: "/images/upper-suite/upper-suite-bedroom-01.webp",
+      fallbackImage: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=85",
       isPlaceholder: true,
       gallery: [
+        "/images/upper-suite/upper-suite-bedroom-01.webp",
+        "/images/upper-suite/upper-suite-bedroom-02.webp",
+        "/images/kitchen/kitchen-upstairs-01.webp",
+      ],
+      galleryFallbacks: [
         "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80",
-        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1000&q=80",
         "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1000&q=80",
       ],
     },
     {
-      id: "lower-bhk",
-      name: "The Lower BHK",
-      tagline: "Garden Verandah & Effortless Ground Living",
-      subtitle: "Independent Ground Floor Residence",
-      description:
-        "Opening directly onto the green garden courtyard, the Lower BHK is crafted for step-free comfort and calm relaxation. Features a spacious air-conditioned master bedroom, private ensuite bathroom, a fully equipped private kitchen, and a peaceful front verandah.",
+      id: "lower-suite",
+      categoryGroup: "suites",
+      galleryTag: "lower-suite",
+      name: "Lower Suite",
+      tagline: "Ground Floor Comfort & Garden Access",
+      subtitle: "Ground Floor • 1 Bedroom • AC • No Separate Kitchen",
+      floor: "Ground Floor",
+      acType: "AC",
+      isAC: true,
+      pricePerNight: 1500,
+      priceDisplay: "₹1,500",
+      extraBedCharge: 400,
+      extraBedChargeDisplay: "₹400",
       capacity: {
-        ideal: "2 Adults",
-        max: "Up to 3 Guests (Extra mattress available on request)",
+        standard: 2,
+        maxExtraBeds: 1,
+        totalMax: 3,
+        label: "2 guests + up to 1 extra bed",
+        summary: "Accommodates 2 guests with up to 1 extra bed (₹400/bed)",
       },
-      bed: "1 King Bed + Verandah Seating",
-      size: "approx. 510 sq.ft",
-      layout: "1 Air-Conditioned Bedroom + 1 Private Bathroom + 1 Private Kitchen + Garden Verandah",
-      price: {
-        amount: null, // Configurable: e.g. "₹2,600" or null
-        period: "per night",
-        unconfirmedText: "Contact us for current rates.",
-        note: "Direct booking rate • Seasonal adjustments apply",
-      },
+      bed: "1 Ground Floor Bedroom with King Bed",
+      layout: "1 AC Bedroom + 1 Ensuite Bathroom + Garden Verandah Access",
+      kitchenNote: "No separate kitchen (Ground floor suite)",
+      description:
+        "Opening toward the front verandah and garden courtyard, the Lower Suite offers effortless step-free ground living with an air-conditioned bedroom and ensuite bathroom. Ideal for couples or solo travelers seeking quiet comfort.",
       highlights: [
-        "Direct step-free ground access to garden verandah",
-        "Shaded front seating overlooking tropical foliage",
-        "Air-conditioned master bedroom",
-        "Dedicated private kitchen with gas cooktop and cookware",
-        "Modern ensuite bathroom with hot water",
-        "On-doorstep private vehicle parking",
+        "Step-free ground access to front verandah & garden",
+        "Air-conditioned master bedroom for restful sleep",
+        "Modern private ensuite bathroom with hot water",
+        "Direct access to the garden and fish pond",
+        "High-speed Wi-Fi, television & automatic power backup",
+        "Complimentary breakfast included",
       ],
-      image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1400&q=85",
+      image: "/images/lower-suite/lower-suite-bedroom-01.webp",
+      fallbackImage: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1400&q=85",
       isPlaceholder: true,
       gallery: [
+        "/images/lower-suite/lower-suite-bedroom-01.webp",
+        "/images/garden/garden-benches-01.webp",
+      ],
+      galleryFallbacks: [
         "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1000&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
-        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1507038772120-7ffe76f79d04?auto=format&fit=crop&w=1000&q=80",
       ],
     },
     {
       id: "entire-villa",
-      name: "The Entire Villa",
-      tagline: "Exclusive Two-Story Tropical Sanctuary",
-      subtitle: "Both Upper & Lower BHKs Combined",
-      description:
-        "Reserve the complete Hesil Villa property for exclusive family vacations, reunion getaways, or friends travelling together. Enjoy sole access to both floors: 2 independent air-conditioned bedrooms, 2 bathrooms, 2 private kitchens, garden courtyard, and upper sun terrace.",
+      categoryGroup: "suites",
+      galleryTag: "entire-villa",
+      name: "Entire Villa",
+      tagline: "Exclusive Private Compound Buyout",
+      subtitle: "Both Floors Combined • 3 Bedrooms • AC • Includes Upstairs Kitchen",
+      floor: "Both Floors (Entire Compound)",
+      acType: "AC",
+      isAC: true,
+      pricePerNight: 4000,
+      priceDisplay: "₹4,000",
+      extraBedCharge: 400,
+      extraBedChargeDisplay: "₹400",
       capacity: {
-        ideal: "4 to 6 Adults",
-        max: "Up to 7 Guests with extra rollaways",
+        standard: 6,
+        maxExtraBeds: 3,
+        totalMax: 9,
+        label: "6 guests + up to 3 extra beds",
+        summary: "Accommodates 6 guests with up to 3 extra beds (₹400/bed)",
       },
-      bed: "2 King Beds + Living Lounges across 2 Floors",
-      size: "approx. 1,000 sq.ft total",
-      layout: "2 Bedrooms + 2 Bathrooms + 2 Private Kitchens + Balcony Terrace + Garden Courtyard",
-      price: {
-        amount: null, // Configurable: e.g. "₹5,200" or null
-        period: "per night",
-        unconfirmedText: "Contact us for current rates.",
-        note: "Special group buyout tariff • Absolute privacy",
-      },
+      bed: "3 AC Bedrooms across 2 Floors (Multiple Beds)",
+      layout: "3 Bedrooms across both floors + Bathrooms + Upstairs Kitchen + Garden & Fish Pond + Parking for 4 Cars",
+      kitchenNote: "Includes full access to the upstairs kitchen",
+      description:
+        "Reserve the complete Hesil Villa property for exclusive family vacations, reunion getaways, or friends traveling together. Includes all bedrooms across both floors, the upstairs kitchen, private compound, lush garden, fish pond, outdoor leisure space, and parking for up to four cars.",
       highlights: [
-        "100% exclusive use of the two-story property & grounds",
-        "Two independent private kitchens for flexible cooking",
-        "Upper open breeze terrace and ground garden verandah",
-        "Private gated parking on premises for multiple vehicles",
-        "Automatic inverter power backup",
-        "Dedicated local host and caretaker assistance",
+        "100% exclusive private use of the two-story villa and compound",
+        "Includes the upstairs kitchen for self-catering",
+        "Private garden with fish pond, benches & games table",
+        "Gated compound with boundary wall and parking for up to 4 cars",
+        "Air conditioning, Wi-Fi, television, hot water, and power backup",
+        "Complimentary breakfast included",
       ],
-      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85",
+      image: "/images/entire-villa/villa-exterior-01.webp",
+      fallbackImage: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85",
       isPlaceholder: true,
       gallery: [
+        "/images/entire-villa/villa-exterior-01.webp",
+        "/images/pond/garden-pond-01.webp",
+        "/images/upper-suite/upper-suite-bedroom-01.webp",
+      ],
+      galleryFallbacks: [
         "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1000&q=80",
         "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80",
-        "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1000&q=80",
+      ],
+    },
+    {
+      id: "simple-cottage",
+      categoryGroup: "cottages",
+      galleryTag: "simple-cottage",
+      name: "Simple Cottage",
+      tagline: "Peaceful Ground Floor Budget Stay",
+      subtitle: "Ground Floor • Non-AC • 2 Guests • 1 Extra Bed Available",
+      floor: "Ground Floor",
+      acType: "Non-AC",
+      isAC: false,
+      pricePerNight: 1000,
+      priceDisplay: "₹1,000",
+      extraBedCharge: 300,
+      extraBedChargeDisplay: "₹300",
+      capacity: {
+        standard: 2,
+        maxExtraBeds: 1,
+        totalMax: 3,
+        label: "2 guests + up to 1 extra bed",
+        summary: "Accommodates 2 guests with up to 1 extra bed (₹300/bed)",
+      },
+      bed: "1 Double Bed with Fresh Linens",
+      layout: "Ground Floor Cottage Room + Private Bathroom + Garden Access",
+      kitchenNote: "No kitchen",
+      description:
+        "A peaceful, non-AC ground-floor cottage set right within the lush green compound. Offers clean, honest comfort for two travelers with a private bathroom, cool natural airflow, and immediate step-out access to the garden and pond.",
+      highlights: [
+        "Ground floor step-free cottage room",
+        "Non-AC accommodation with natural cross-ventilation & fans",
+        "Private bathroom with fresh towels",
+        "Quiet tropical greenery right outside your door",
+        "High-speed Wi-Fi & power backup",
+        "Complimentary breakfast included",
+      ],
+      image: "/images/simple-cottage/simple-cottage-room-01.webp",
+      fallbackImage: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1400&q=85",
+      isPlaceholder: true,
+      gallery: [
+        "/images/simple-cottage/simple-cottage-room-01.webp",
+        "/images/garden/garden-benches-01.webp",
+      ],
+      galleryFallbacks: [
+        "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1507038772120-7ffe76f79d04?auto=format&fit=crop&w=1000&q=80",
+      ],
+    },
+    {
+      id: "solo-cottage",
+      categoryGroup: "cottages",
+      galleryTag: "solo-cottage",
+      name: "Solo Cottage",
+      tagline: "Affordable Individual Retreat",
+      subtitle: "Ground Floor • Non-AC • Bed & Hall • Outside Washroom",
+      floor: "Ground Floor",
+      acType: "Non-AC",
+      isAC: false,
+      pricePerNight: 600,
+      priceDisplay: "₹600",
+      extraBedCharge: 0,
+      extraBedChargeDisplay: "N/A",
+      capacity: {
+        standard: 1,
+        maxExtraBeds: 0,
+        totalMax: 1,
+        label: "1 guest (Solo Stay)",
+        summary: "Accommodates 1 guest (Bed & Hall, outside washroom)",
+      },
+      bed: "1 Single Bed in Cozy Hall Setting",
+      layout: "Ground Floor Bed & Hall + Dedicated Outside Washroom",
+      kitchenNote: "No kitchen",
+      description:
+        "An honest, wallet-friendly option tailored for solo wanderers, backpackers, or remote workers looking for a quiet stay in Alappuzha. Features a comfortable bed, hall space, dedicated outside washroom, and peaceful garden surroundings.",
+      highlights: [
+        "Affordable solo stay in peaceful Kerala compound",
+        "Non-AC ground floor layout with bed and hall",
+        "Dedicated outside washroom",
+        "Quiet garden environment for reading or working",
+        "High-speed Wi-Fi across the property",
+        "Complimentary breakfast included",
+      ],
+      image: "/images/solo-cottage/solo-cottage-room-01.webp",
+      fallbackImage: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=85",
+      isPlaceholder: true,
+      gallery: [
+        "/images/solo-cottage/solo-cottage-room-01.webp",
+        "/images/garden/garden-trees-01.webp",
+      ],
+      galleryFallbacks: [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1000&q=80",
       ],
     },
   ],
 
-  // External Booking Platforms (Configurable)
-  // Per strict instructions: There are currently NO confirmed property listing URLs.
-  // When URLs are added, set url to string and isLive to true.
-  externalPlatforms: [
-    {
-      name: "Airbnb",
-      url: null,
-      isLive: false,
-      badgeText: "Coming Soon",
-      description: "Superhost listing in preparation",
-    },
-    {
-      name: "Booking.com",
-      url: null,
-      isLive: false,
-      badgeText: "Coming Soon",
-      description: "Partner listing in preparation",
-    },
-    {
-      name: "Agoda",
-      url: null,
-      isLive: false,
-      badgeText: "Coming Soon",
-      description: "Listing in preparation",
-    },
-    {
-      name: "MakeMyTrip",
-      url: null,
-      isLive: false,
-      badgeText: "Coming Soon",
-      description: "Homestay listing in preparation",
-    },
-    {
-      name: "Goibibo",
-      url: null,
-      isLive: false,
-      badgeText: "Coming Soon",
-      description: "Homestay listing in preparation",
-    },
-  ],
+  // Garden and Stay Experience Section
+  gardenExperience: {
+    heading: "A little more space to slow down.",
+    copy: "Spend time beside the garden fish pond, relax on the benches, enjoy snacks and casual games at the outdoor table, or simply unwind beneath the trees. Hesil Villa offers a private space to enjoy time together, at your own pace.",
+    features: [
+      {
+        id: "pond",
+        title: "Garden & Fish Pond",
+        description:
+          "A quiet garden featuring a pond with many fish and benches set nearby to sit, unwind, and watch the water in the shade of Kerala trees.",
+        tag: "Peaceful Outdoors",
+      },
+      {
+        id: "leisure",
+        title: "Outdoor Table for Games & Snacks",
+        description:
+          "An outdoor table designed for casual board games, morning tea, snacks, and shared meals with family and friends in the open air.",
+        tag: "Family & Play",
+      },
+      {
+        id: "greenery",
+        title: "Trees & Greenery",
+        description:
+          "Abundant coconut palms and native Kerala trees within the compound create a calm, natural microclimate away from traffic and noise.",
+        tag: "Natural Atmosphere",
+      },
+      {
+        id: "compound",
+        title: "Enclosed Compound & Parking",
+        description:
+          "A boundary wall encloses the entire property, offering security, personal privacy, and dedicated parking space for up to four cars.",
+        tag: "Privacy & Space",
+      },
+    ],
+  },
 
-  // Nature-Inspired Amenities (Real, verified facilities only)
+  // Owner Confirmed Amenities (16 Verified Amenities)
   amenities: [
-    {
-      title: "Natural Green Surroundings",
-      description: "Surrounded by palms and greenery in a peaceful coastal residential enclave.",
-      icon: "Trees",
-    },
-    {
-      title: "2 Independent Kitchens",
-      description: "Both Upper and Lower BHKs have their own private kitchen with gas cooktop and cookware.",
-      icon: "Utensils",
-    },
-    {
-      title: "Quiet Air-Conditioning",
-      description: "Individual climate control in each master bedroom suite for restful sleep.",
-      icon: "Wind",
-    },
-    {
-      title: "High-Speed Fiber Wi-Fi",
-      description: "Reliable fiber internet for remote working or streaming peaceful music.",
-      icon: "Wifi",
-    },
-    {
-      title: "Inverter Power Backup",
-      description: "Automatic backup system ensuring uninterrupted lighting, fans, and essentials.",
-      icon: "Zap",
-    },
-    {
-      title: "Secure Gated Parking",
-      description: "Dedicated private parking space on premises for cars and two-wheelers.",
-      icon: "Car",
-    },
-    {
-      title: "24/7 Hot Water Geyser",
-      description: "Instant hot water geysers in both private ensuite bathrooms.",
-      icon: "Flame",
-    },
-    {
-      title: "Warm Homestay Hospitality",
-      description: "Attentive caretaker support, clean linens, and authentic local travel advice.",
-      icon: "HeartHandshake",
-    },
+    { title: "Dedicated Workspace", description: "Quiet table space suited for remote work and reading" },
+    { title: "High-Speed Wi-Fi", description: "Reliable wireless internet access across all rooms & compound" },
+    { title: "Premium Bedding & Linens", description: "Crisp, fresh bed linens with comfortable mattresses" },
+    { title: "Firm & Soft Pillow Options", description: "Choice of pillows to suit your sleeping preference" },
+    { title: "Extra Blankets", description: "Cozy blankets available upon request" },
+    { title: "Shampoo & Conditioner", description: "Essential bath amenities provided in bathrooms" },
+    { title: "Body Wash & Hand Soap", description: "Refreshing soap and cleansing wash in every bath area" },
+    { title: "Fresh Bath Towels", description: "Clean, freshly laundered towels provided for every guest" },
+    { title: "Air Conditioning", description: "Individual climate control in applicable AC suites" },
+    { title: "Heating, Fans & Space Heaters", description: "Available for seasonal comfort during cooler evenings" },
+    { title: "24/7 Hot Water", description: "Dedicated water heaters in modern bathrooms" },
+    { title: "Automatic Power Backup", description: "Inverter backup ensuring continuous lighting, fans and essentials" },
+    { title: "Television", description: "TV setup for relaxed family leisure and entertainment" },
+    { title: "Parking for Up to 4 Cars", description: "Secure on-premises parking inside the gated boundary wall" },
+    { title: "Complimentary Breakfast", description: "Fresh morning breakfast included for all staying guests" },
+    { title: "One Kitchen Located Upstairs", description: "Basic kitchen amenities available. Induction stove usage: ₹200 extra" },
   ],
 
-  // Nature-Inspired Curated Photo Collection
-  // Categories required:
-  // villa exterior, front entrance, garden and greenery, upper BHK bedroom,
-  // lower BHK bedroom, private kitchens, bathrooms, balcony and terrace,
-  // outdoor seating, architectural details, natural light and shadows, nearby coastal surroundings.
-  gallery: [
-    {
-      id: "gal-exterior",
-      title: "Villa Architecture & Greenery",
-      category: "exterior",
-      categoryLabel: "Villa Exterior",
-      aspect: "landscape",
-      src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85",
-      caption: "Clean contemporary lines framed by tropical coconut trees and green surroundings.",
-      isPlaceholder: true,
-    },
-    {
-      id: "gal-entrance",
-      title: "Front Entrance & Gate",
-      category: "exterior",
-      categoryLabel: "Exterior",
-      aspect: "portrait",
-      src: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=85",
-      caption: "Welcoming entrance path lined with tropical flora.",
-      isPlaceholder: true,
-    },
-    {
-      id: "gal-garden",
-      title: "Garden & Courtyard Greenery",
-      category: "garden",
-      categoryLabel: "Garden",
-      aspect: "landscape",
-      src: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85",
-      caption: "Lush tropical green foliage and quiet garden courtyard.",
-      isPlaceholder: true,
-    },
-    {
-      id: "gal-upper-bed",
-      title: "Upper BHK Master Bedroom",
-      category: "bedrooms",
-      categoryLabel: "Bedrooms",
-      aspect: "portrait",
-      src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=85",
-      caption: "Sunlit upper bedroom suite with calming neutral tones and crisp linens.",
-      isPlaceholder: true,
-    },
-    {
-      id: "gal-lower-bed",
-      title: "Lower BHK Master Bedroom",
-      category: "bedrooms",
-      categoryLabel: "Bedrooms",
-      aspect: "portrait",
-      src: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=900&q=85",
-      caption: "Ground-floor master bedroom offering cool, shaded comfort and quiet privacy.",
-      isPlaceholder: true,
-    },
-    {
-      id: "gal-kitchen",
-      title: "Private Self-Catering Kitchen",
-      category: "kitchen",
-      categoryLabel: "Kitchen",
-      aspect: "landscape",
-      src: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=85",
-      caption: "Dedicated private kitchen equipped with gas stove, refrigerator, and cooking essentials.",
-      isPlaceholder: true,
-    },
-    {
-      id: "gal-terrace",
-      title: "Upper Balcony & Terrace",
-      category: "exterior",
-      categoryLabel: "Exterior",
-      aspect: "landscape",
-      src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85",
-      caption: "Private open terrace catching coastal breeze and evening sunsets.",
-      isPlaceholder: true,
-    },
-    {
-      id: "gal-seating",
-      title: "Outdoor Verandah Seating",
-      category: "garden",
-      categoryLabel: "Garden",
-      aspect: "landscape",
-      src: "https://images.unsplash.com/photo-1507038772120-7ffe76f79d04?auto=format&fit=crop&w=1200&q=85",
-      caption: "Peaceful spot for morning tea surrounded by quiet nature.",
-      isPlaceholder: true,
-    },
-    {
-      id: "gal-details",
-      title: "Architectural Details & Shadows",
-      category: "details",
-      categoryLabel: "Details & Light",
-      aspect: "portrait",
-      src: "https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=900&q=85",
-      caption: "Natural daylight filtering through wooden louvers and coastal architecture.",
-      isPlaceholder: true,
-    },
-    {
-      id: "gal-surroundings",
-      title: "Nearby Coastal Surroundings",
-      category: "surroundings",
-      categoryLabel: "Coastal Surroundings",
-      aspect: "landscape",
-      src: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1400&q=85",
-      caption: "The golden coastline of Alappuzha just a brief stroll down the neighborhood road.",
-      isPlaceholder: true,
-    },
-    {
-      id: "gal-backwater",
-      title: "Serene Backwater Canal",
-      category: "surroundings",
-      categoryLabel: "Coastal Surroundings",
-      aspect: "landscape",
-      src: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1400&q=85",
-      caption: "Quiet waterways with water lilies in the nearby Kuttanad canals.",
-      isPlaceholder: true,
-    },
-  ],
-
-  // Curated Alappuzha Experiences (Differentiating homestay arrangements vs self-guided)
-  experiences: [
-    {
-      id: "exp-1",
-      title: "Shallow Village Canoe Trails",
-      type: "Arranged with trusted local boatmen",
-      description:
-        "Glide silently on traditional hand-rowed wooden canoes through narrow village canals shaded by coconut palms where motorized boats cannot enter.",
-      duration: "2 - 3 Hours",
-      image: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1000&q=80",
-    },
-    {
-      id: "exp-2",
-      title: "Houseboat Day Cruises on Vembanad",
-      type: "Arranged with licensed partners",
-      description:
-        "Spend a tranquil day cruising the wider backwaters of Punnamada and Vembanad Lake on a traditional Kettuvallam with fresh Kerala lunch served on board.",
-      duration: "Half-day / Full-day",
-      image: "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1000&q=80",
-    },
-    {
-      id: "exp-3",
-      title: "Coastal Sunset & Old Sea Pier",
-      type: "Self-guided walk / Short drive",
-      description:
-        "Watch the Arabian Sea sunset against the historic sea bridge ruins at Alappuzha Beach while enjoying fresh sea air and roasted seaside snacks.",
-      duration: "Evening stroll",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80",
-    },
-    {
-      id: "exp-4",
-      title: "Authentic Coastal Dining & Cooking",
-      type: "Host recommendations & private kitchen",
-      description:
-        "Cook your own seafood in your suite's private kitchen or discover family-run eateries for authentic Kerala fish curry, appams, and vegetarian sadhya.",
-      duration: "Flexible",
-      image: "https://images.unsplash.com/photo-1610057099431-d73a1c9d2f2f?auto=format&fit=crop&w=1000&q=80",
-    },
-  ],
-
-  // Researched Nearby Attractions (Travel Journal Format)
-  // Coordinates: 9.635318125878603, 76.307138423238
-  // Curated travel journal: "There's more to discover around you."
+  // Verified Nearby Attractions & Connectivity
+  // Format: Place name on LEFT, Distance on RIGHT
   nearbyAttractions: [
     {
-      id: "att-beach",
-      name: "Alappuzha Beach",
-      distance: "~6.5 km",
-      travelTime: "12 - 15 min drive",
-      description:
-        "The iconic historic beach of Alleppey featuring the 150-year-old sea pier ruins, expansive sands, and lively evening stalls.",
-      category: "Coastline",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: "att-lighthouse",
-      name: "Alappuzha Lighthouse",
-      distance: "~6.2 km",
-      travelTime: "12 min drive",
-      description:
-        "Constructed in 1862, this red-and-white striped beacon offers panoramic 360-degree views of the Arabian Sea and coconut tree canopy.",
-      category: "Heritage",
-      image: "https://images.unsplash.com/photo-1509233725247-49e657c54213?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: "att-vijaya-park",
-      name: "Vijaya Beach Park",
-      distance: "~6.4 km",
-      travelTime: "12 min drive",
-      description:
-        "A shaded coastal park right by the beach with walking trails, children's boating ponds, and open green recreation grounds.",
-      category: "Park & Leisure",
-      image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: "att-sea-view-park",
-      name: "Sea View Park",
-      distance: "~6.6 km",
-      travelTime: "13 min drive",
-      description:
-        "Serene coastal recreation grounds offering direct sunset vistas, boating facilities, and palm-shaded park benches.",
-      category: "Park & Leisure",
-      image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: "att-museum",
-      name: "Revi Karunakaran Memorial Museum",
-      distance: "~7.8 km",
-      travelTime: "16 min drive",
-      description:
-        "An internationally acclaimed museum housing a priceless private collection of Swarovski crystals, Belgian glass, Tanjore paintings, and antique artifacts.",
-      category: "Culture & Art",
-      image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: "att-punnamada",
-      name: "Punnamada Lake (Houseboat Jetty)",
-      distance: "~9.5 km",
-      travelTime: "20 min drive",
-      description:
-        "The starting hub for world-famous Kerala backwater cruises and the venue of the historic Nehru Trophy Snake Boat Race.",
-      category: "Backwaters",
-      image: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80",
-    },
-    {
       id: "att-temple",
-      name: "Mullakkal Rajarajeswari Temple",
-      distance: "~8.5 km",
-      travelTime: "18 min drive",
-      description:
-        "A multi-century-old traditional Kerala open-roof temple dedicated to Goddess Durga, reflecting authentic local temple architecture.",
-      category: "Heritage & Faith",
-      image: "https://images.unsplash.com/photo-1600100397608-f010f443b716?auto=format&fit=crop&w=800&q=80",
+      name: "Kanichukulangara Temple",
+      distance: "Approx. 1 km",
+      note: "Historic Kerala temple, approximately 1 km away by road.",
     },
     {
-      id: "att-backwaters",
-      name: "Alappuzha Backwaters & Kuttanad",
-      distance: "Enroute / 20 min drive",
-      travelTime: "Full / Half-day trip",
-      description:
-        "The 'Rice Bowl of Kerala' where farming is done below sea level, crisscrossed with scenic waterways, duck farms, and rural hamlets.",
-      category: "Nature & Ecology",
-      image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+      id: "att-harbour",
+      name: "Chethy Harbour",
+      distance: "Approx. 2 km",
+      note: "Coastal fishing harbour and coastal shoreline.",
+    },
+    {
+      id: "att-beach",
+      name: "Mararikulam Beach",
+      distance: "Approx. 4.5 km",
+      note: "Renowned peaceful white sand beach and coastal walk.",
+    },
+    {
+      id: "att-church",
+      name: "Arthunkal Church and Beach",
+      distance: "Approx. 6 km",
+      note: "Historic St. Andrew's Basilica and adjacent coastal beach.",
     },
   ],
 
-  // Trust Indicators (Verified homestay hospitality points)
-  trustPoints: [
+  // Curated Mosaic Gallery Collection
+  // Supports categories: All, Exterior, Garden, Fish Pond, Upper Suite, Lower Suite, Entire Villa, Cottages, Simple Cottage, Solo Cottage, Kitchen, Common Areas
+  gallery: [
     {
-      title: "Complete Independent Living",
-      desc: "Both Upper & Lower BHKs feature private entrances, private master bedrooms, private bathrooms, and private kitchens.",
+      id: "gal-exterior-01",
+      src: "/images/exterior/villa-exterior-01.webp",
+     // fallbackSrc: "/images/exterior/villa-exterior-01.webp",
+      alt: "Villa architecture and enclosed private compound at Hesil Villa",
+      category: "Exterior",
+      categorySlug: "exterior",
+      accommodation: ["entire-villa"],
+      caption: "Contemporary Kerala villa enclosed within a private boundary wall with tropical trees.",
+      featured: true,
+      aspect: "landscape",
+      isPlaceholder: true,
     },
     {
-      title: "Direct WhatsApp Host Communication",
-      desc: "Speak directly with your host with zero middleman markups, immediate local guidance, and personal attention.",
+      id: "gal-pond-01",
+      src: "/images/pond/garden-pond-01.webp",
+      fallbackSrc: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85",
+      alt: "Garden fish pond and relaxation benches at Hesil Villa",
+      category: "Fish Pond",
+      categorySlug: "pond",
+      accommodation: ["entire-villa"],
+      caption: "Serene garden pond with fish and surrounding benches to sit, slow down, and unwind.",
+      featured: false,
+      aspect: "landscape",
+      isPlaceholder: true,
     },
     {
-      title: "Tranquil Residential Nature",
-      desc: "Situated away from busy commercial highways, surrounded by coastal trees and peaceful residential living.",
+      id: "gal-upper-01",
+      src: "/images/upper-suite/upper-suite-bedroom-01.webp",
+      fallbackSrc: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=85",
+      alt: "Upper Suite master bedroom at Hesil Villa",
+      category: "Upper Suite",
+      categorySlug: "upper-suite",
+      accommodation: ["upper-suite", "entire-villa"],
+      caption: "Air-conditioned upper suite bedroom filled with gentle natural light.",
+      featured: false,
+      aspect: "portrait",
+      isPlaceholder: true,
     },
     {
-      title: "Freedom of Self-Catering",
-      desc: "Enjoy the freedom to brew your morning tea, prepare breakfast, or cook fresh seafood in your own kitchen.",
+      id: "gal-lower-01",
+      src: "/images/lower-suite/lower-suite-bedroom-01.webp",
+      fallbackSrc: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=900&q=85",
+      alt: "Lower Suite bedroom suite at Hesil Villa",
+      category: "Lower Suite",
+      categorySlug: "lower-suite",
+      accommodation: ["lower-suite", "entire-villa"],
+      caption: "Ground floor air-conditioned suite offering quiet comfort and step-free verandah access.",
+      featured: false,
+      aspect: "portrait",
+      isPlaceholder: true,
+    },
+    {
+      id: "gal-simple-01",
+      src: "/images/simple-cottage/simple-cottage-room-01.webp",
+      fallbackSrc: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=85",
+      alt: "Simple Cottage ground-floor room at Hesil Villa",
+      category: "Simple Cottage",
+      categorySlug: "simple-cottage",
+      accommodation: ["cottages", "simple-cottage"],
+      caption: "Comfortable non-AC ground cottage room with private bathroom and garden breeze.",
+      featured: false,
+      aspect: "landscape",
+      isPlaceholder: true,
+    },
+    {
+      id: "gal-solo-01",
+      src: "/images/solo-cottage/solo-cottage-room-01.webp",
+      fallbackSrc: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=85",
+      alt: "Solo Cottage bed and hall at Hesil Villa",
+      category: "Solo Cottage",
+      categorySlug: "solo-cottage",
+      accommodation: ["cottages", "solo-cottage"],
+      caption: "Cozy, affordable solo staycation space with bed, hall and outside washroom.",
+      featured: false,
+      aspect: "landscape",
+      isPlaceholder: true,
+    },
+    {
+      id: "gal-kitchen-01",
+      src: "/images/kitchen/kitchen-upstairs-01.webp",
+      fallbackSrc: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=85",
+      alt: "Upstairs kitchen at Hesil Villa",
+      category: "Kitchen",
+      categorySlug: "kitchen",
+      accommodation: ["upper-suite", "entire-villa"],
+      caption: "The single dedicated kitchen located upstairs (Induction stove usage: ₹200 extra).",
+      featured: false,
+      aspect: "landscape",
+      isPlaceholder: true,
+    },
+    {
+      id: "gal-benches-01",
+      src: "/images/garden/garden-benches-01.webp",
+      fallbackSrc: "https://images.unsplash.com/photo-1507038772120-7ffe76f79d04?auto=format&fit=crop&w=1200&q=85",
+      alt: "Outdoor relaxation benches and table at Hesil Villa",
+      category: "Common Areas",
+      categorySlug: "common-areas",
+      accommodation: ["entire-villa"],
+      caption: "Outdoor table and benches for casual board games, snacks, and morning tea beneath the trees.",
+      featured: false,
+      aspect: "landscape",
+      isPlaceholder: true,
+    },
+    {
+      id: "gal-upper-02",
+      src: "/images/upper-suite/upper-suite-bedroom-02.webp",
+      fallbackSrc: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=85",
+      alt: "Second bedroom in Upper Suite at Hesil Villa",
+      category: "Upper Suite",
+      categorySlug: "upper-suite",
+      accommodation: ["upper-suite", "entire-villa"],
+      caption: "Second bedroom upstairs accommodating extra family members or friends.",
+      featured: false,
+      aspect: "portrait",
+      isPlaceholder: true,
+    },
+    {
+      id: "gal-garden-trees-01",
+      src: "/images/garden/garden-trees-01.webp",
+      fallbackSrc: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85",
+      alt: "Compound garden and mature coconut trees at Hesil Villa",
+      category: "Garden",
+      categorySlug: "garden",
+      accommodation: ["entire-villa"],
+      caption: "Lush tropical green foliage and quiet garden courtyard with open space for leisure.",
+      featured: false,
+      aspect: "landscape",
+      isPlaceholder: true,
+    },
+  ],
+
+  // Verified FAQ (Short and factual per brief)
+  faqs: [
+    {
+      question: "What accommodation options are available at Hesil Villa?",
+      answer:
+        "We offer five accommodation options across two categories: Suites & Entire Villa (Upper Suite with 2 AC bedrooms, Lower Suite with 1 AC bedroom, and the Entire Villa buyout) and Cottages (Simple Cottage with Non-AC for 2 guests, and Solo Cottage with Non-AC for 1 guest).",
+    },
+    {
+      question: "What are the per-night rates and extra-bed charges?",
+      answer:
+        "Upper Suite (AC, 4 guests): ₹3,000/night (extra bed ₹400 each, max 2). Lower Suite (AC, 2 guests): ₹1,500/night (extra bed ₹400, max 1). Entire Villa (AC, 6 guests): ₹4,000/night (extra bed ₹400 each, max 3). Simple Cottage (Non-AC, 2 guests): ₹1,000/night (extra bed ₹300, max 1). Solo Cottage (Non-AC, 1 guest): ₹600/night (no extra bed).",
+    },
+    {
+      question: "Is complimentary breakfast included?",
+      answer:
+        "Yes, complimentary breakfast is included for all staying guests across all accommodation types.",
+    },
+    {
+      question: "What are the kitchen facilities and is there an induction charge?",
+      answer:
+        "There is one kitchen in the property, located upstairs with basic amenities (available with Upper Suite and Entire Villa bookings). Usage of the induction stove is ₹200 extra.",
+    },
+    {
+      question: "What are the check-in and check-out timings?",
+      answer:
+        "Check-in is at 11:00 AM and check-out is at 10:00 AM. Early check-in or late check-out may be possible depending on availability; please contact the host in advance.",
+    },
+    {
+      question: "Is vehicle parking available on premises?",
+      answer:
+        "Yes, secure private parking is available for up to four cars inside our enclosed compound with boundary wall.",
+    },
+    {
+      question: "How do I enquire and book?",
+      answer:
+        "All enquiries and bookings are handled directly via WhatsApp with the host at +91 75105 19751 or +91 94977 31378 with zero middleman commissions.",
     },
   ],
 };

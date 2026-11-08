@@ -1,21 +1,89 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { Maximize2 } from 'lucide-react';
+import OptimizedImage from './OptimizedImage';
 import { homestayConfig } from '../config/homestayConfig';
 
-export default function EditorialGallery({ onOpenGalleryLightbox }) {
-  const [activeCategory, setActiveCategory] = useState('all');
+const ALL_CATEGORY_DEFS = [
+  { id: 'all', label: 'All' },
+  { id: 'exterior', label: 'Exterior' },
+  { id: 'garden', label: 'Garden' },
+  { id: 'pond', label: 'Fish Pond' },
+  { id: 'upper-suite', label: 'Upper Suite' },
+  { id: 'lower-suite', label: 'Lower Suite' },
+  { id: 'entire-villa', label: 'Entire Villa' },
+  { id: 'cottages', label: 'Cottages' },
+  { id: 'simple-cottage', label: 'Simple Cottage' },
+  { id: 'solo-cottage', label: 'Solo Cottage' },
+  { id: 'kitchen', label: 'Kitchen' },
+  { id: 'common-areas', label: 'Common Areas' },
+];
 
-  const filterTabs = [
-    { id: 'all', label: 'All' },
-    { id: 'exterior', label: 'Exterior' },
-    { id: 'bedrooms', label: 'Bedrooms' },
-    { id: 'kitchen', label: 'Kitchen' },
-    { id: 'garden', label: 'Garden' },
-  ];
+export default function EditorialGallery({
+  activeCategory = 'all',
+  onSelectCategory,
+  onOpenGalleryLightbox,
+}) {
+  // Dynamically calculate photo counts for each category
+  const { counts, availableTabs } = useMemo(() => {
+    const calculatedCounts = {};
+    const galleryItems = homestayConfig.gallery;
 
-  const filteredPhotos = activeCategory === 'all'
-    ? homestayConfig.gallery
-    : homestayConfig.gallery.filter((photo) => photo.category === activeCategory);
+    ALL_CATEGORY_DEFS.forEach((cat) => {
+      if (cat.id === 'all') {
+        calculatedCounts[cat.id] = galleryItems.length;
+      } else if (cat.id === 'cottages') {
+        // Matches any item associated with cottages, simple-cottage, or solo-cottage
+        calculatedCounts[cat.id] = galleryItems.filter(
+          (p) =>
+            p.accommodation?.includes('cottages') ||
+            p.accommodation?.includes('simple-cottage') ||
+            p.accommodation?.includes('solo-cottage') ||
+            p.categorySlug === 'simple-cottage' ||
+            p.categorySlug === 'solo-cottage'
+        ).length;
+      } else if (['upper-suite', 'lower-suite', 'entire-villa', 'simple-cottage', 'solo-cottage'].includes(cat.id)) {
+        calculatedCounts[cat.id] = galleryItems.filter(
+          (p) => p.accommodation?.includes(cat.id) || p.categorySlug === cat.id
+        ).length;
+      } else {
+        calculatedCounts[cat.id] = galleryItems.filter(
+          (p) => p.categorySlug === cat.id
+        ).length;
+      }
+    });
+
+    // Hide categories that contain zero photographs
+    const validTabs = ALL_CATEGORY_DEFS.filter(
+      (cat) => (calculatedCounts[cat.id] || 0) > 0
+    );
+
+    return { counts: calculatedCounts, availableTabs: validTabs };
+  }, []);
+
+  // Filter photos based on active category
+  const filteredPhotos = useMemo(() => {
+    if (activeCategory === 'all') {
+      return homestayConfig.gallery;
+    }
+    if (activeCategory === 'cottages') {
+      return homestayConfig.gallery.filter(
+        (p) =>
+          p.accommodation?.includes('cottages') ||
+          p.accommodation?.includes('simple-cottage') ||
+          p.accommodation?.includes('solo-cottage') ||
+          p.categorySlug === 'simple-cottage' ||
+          p.categorySlug === 'solo-cottage'
+      );
+    }
+    if (['upper-suite', 'lower-suite', 'entire-villa', 'simple-cottage', 'solo-cottage'].includes(activeCategory)) {
+      return homestayConfig.gallery.filter(
+        (photo) => photo.accommodation?.includes(activeCategory) || photo.categorySlug === activeCategory
+      );
+    }
+    return homestayConfig.gallery.filter(
+      (photo) => photo.categorySlug === activeCategory
+    );
+  }, [activeCategory]);
 
   return (
     <section id="gallery" className="py-20 md:py-28 bg-[#F4F1E7] text-[#343831]">
@@ -28,51 +96,62 @@ export default function EditorialGallery({ onOpenGalleryLightbox }) {
               Visual Presentation
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#263D32] font-normal leading-tight">
-              Gallery
+              Photo Gallery
             </h2>
           </div>
 
           <p className="font-sans text-xs sm:text-sm text-[#52574E] font-light max-w-sm">
-            Select an area or click any photograph to expand into the fullscreen viewer.
+            An editorial look into Hesil Villa's living spaces, budget cottages, garden fish pond, and serene Kerala surroundings.
           </p>
         </div>
 
-        {/* Gallery Filter Tabs */}
+        {/* Gallery Filter Tabs with Dynamic Counts */}
         <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
-          {filterTabs.map((tab) => {
+          {availableTabs.map((tab) => {
             const isActive = activeCategory === tab.id;
+            const count = counts[tab.id] || 0;
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveCategory(tab.id)}
-                className={`px-4 py-2 rounded-full text-xs font-sans uppercase tracking-[0.16em] font-medium transition-all duration-300 cursor-pointer whitespace-nowrap ${
+                onClick={() => onSelectCategory(tab.id)}
+                className={`px-4 py-2 rounded-full text-xs font-sans tracking-[0.14em] font-medium transition-all duration-300 cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
                   isActive
                     ? 'bg-[#263D32] text-[#F4F1E7] shadow-xs'
                     : 'bg-[#FFFFFF] border border-[#C9AE8C]/50 text-[#52574E] hover:border-[#263D32] hover:text-[#263D32]'
                 }`}
                 aria-pressed={isActive}
               >
-                {tab.label}
+                <span>{tab.label}</span>
+                <span
+                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                    isActive ? 'bg-[#F4F1E7]/25 text-white' : 'bg-[#F4F1E7] text-[#71866B]'
+                  }`}
+                >
+                  {count}
+                </span>
               </button>
             );
           })}
         </div>
 
-        {/* Editorial Masonry Grid */}
+        {/* Asymmetric Editorial Mosaic Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-5 items-start">
           {filteredPhotos.map((item, index) => {
             // Asymmetric layout with varied natural proportions
             let colSpan = 'lg:col-span-4';
             let heightClass = 'h-[320px] sm:h-[380px]';
 
-            if (item.aspect === 'landscape' && (index === 0 || index === 5)) {
-              colSpan = 'lg:col-span-8';
-              heightClass = 'h-[360px] sm:h-[420px]';
+            if (item.featured || (activeCategory === 'all' && index === 0)) {
+              colSpan = 'lg:col-span-8 sm:col-span-2';
+              heightClass = 'h-[380px] sm:h-[460px]';
             } else if (item.aspect === 'portrait') {
-              colSpan = 'lg:col-span-4';
-              heightClass = 'h-[400px] sm:h-[460px]';
+              colSpan = 'lg:col-span-4 sm:col-span-1';
+              heightClass = 'h-[380px] sm:h-[440px]';
+            } else if (index % 5 === 1) {
+              colSpan = 'lg:col-span-4 sm:col-span-1';
+              heightClass = 'h-[380px] sm:h-[440px]';
             } else {
-              colSpan = 'lg:col-span-6';
+              colSpan = 'lg:col-span-6 sm:col-span-1';
               heightClass = 'h-[340px] sm:h-[400px]';
             }
 
@@ -83,28 +162,27 @@ export default function EditorialGallery({ onOpenGalleryLightbox }) {
                 onClick={() => onOpenGalleryLightbox(filteredPhotos, index)}
               >
                 <div className={`w-full ${heightClass} overflow-hidden`}>
-                  <img
+                  <OptimizedImage
                     src={item.src}
-                    alt={item.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700 opacity-95 group-hover:opacity-100"
-                    loading="lazy"
+                    fallbackSrc={item.fallbackSrc}
+                    alt={item.alt}
+                    className="w-full h-full group-hover:scale-102 transition-transform duration-700 opacity-95 group-hover:opacity-100"
+                    showPlaceholderBadge={item.isPlaceholder}
                   />
                 </div>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-75 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent opacity-75 group-hover:opacity-90 transition-opacity pointer-events-none" />
 
-                {/* Development demo indicator */}
-                <span className="absolute top-3 left-3 text-[8px] uppercase tracking-wider font-mono px-2 py-0.5 rounded-sm bg-black/60 text-[#F4F1E7] backdrop-blur-xs">
-                  DEMO IMAGE — REPLACE BEFORE LAUNCH
-                </span>
-
-                {/* Caption on hover/bottom */}
-                <div className="absolute bottom-4 left-4 right-4 z-10 text-white flex items-end justify-between gap-3">
+                {/* Caption on bottom */}
+                <div className="absolute bottom-4 left-4 right-4 z-10 text-white flex items-end justify-between gap-3 pointer-events-none">
                   <div>
+                    <span className="text-[9px] uppercase tracking-widest font-sans text-[#C9AE8C] block mb-0.5 font-medium">
+                      {item.category}
+                    </span>
                     <h3 className="font-serif text-lg font-normal leading-snug text-[#F4F1E7]">
-                      {item.title}
+                      {item.alt}
                     </h3>
-                    <p className="text-[11px] font-sans text-[#F4F1E7]/75 font-light mt-0.5 line-clamp-1">
+                    <p className="text-[11px] font-sans text-[#F4F1E7]/80 font-light mt-0.5 line-clamp-1">
                       {item.caption}
                     </p>
                   </div>
@@ -116,6 +194,18 @@ export default function EditorialGallery({ onOpenGalleryLightbox }) {
             );
           })}
         </div>
+
+        {/* Back to All Photos Shortcut when a specific category is active */}
+        {activeCategory !== 'all' && (
+          <div className="text-center mt-10">
+            <button
+              onClick={() => onSelectCategory('all')}
+              className="text-xs font-sans uppercase tracking-[0.16em] text-[#263D32] hover:text-[#71866B] font-semibold underline underline-offset-4 cursor-pointer"
+            >
+              ← Back to All Photographs ({counts.all})
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

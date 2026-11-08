@@ -16,7 +16,7 @@ export default function Navbar({ onOpenBooking }) {
 
   const navLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'The Villa', href: '#villa' },
+    { name: 'Accommodations', href: '#villa' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'Location', href: '#location' },
   ];

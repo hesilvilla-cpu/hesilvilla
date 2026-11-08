@@ -1,26 +1,9 @@
 import React from 'react';
-import { Navigation } from 'lucide-react';
+import { MapPin, Navigation, ExternalLink } from 'lucide-react';
 import { homestayConfig } from '../config/homestayConfig';
 
 export default function LocationSection() {
-  const verifiedDestinations = [
-    {
-      name: "Alappuzha Lighthouse & Town Beach",
-      detail: "Accessible directly via the coastal road heading south (~6 km)",
-    },
-    {
-      name: "Punnamada Lake (Houseboat Hub)",
-      detail: "Direct connection via Alappuzha town link road",
-    },
-    {
-      name: "Alappuzha Railway Station (ALLP)",
-      detail: "Primary railway link connecting Southern Railway lines (~8 km)",
-    },
-    {
-      name: "Cochin International Airport (COK)",
-      detail: "Accessible via the northern NH 66 highway corridor (~80 km)",
-    },
-  ];
+  const { nearbyAttractions, contact } = homestayConfig;
 
   return (
     <section id="location" className="py-20 md:py-28 bg-[#F4F1E7] text-[#343831]">
@@ -29,13 +12,13 @@ export default function LocationSection() {
         {/* Section Header */}
         <div className="max-w-2xl mb-14">
           <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#71866B] font-semibold block mb-2">
-            Property Coordinates & Access
+            Surroundings & Access
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#263D32] font-normal leading-tight">
-            Location
+            Location & Connectivity
           </h2>
           <p className="font-sans text-sm text-[#52574E] font-light mt-3 leading-relaxed">
-            Situated on the coastal road in Alappuzha at exact coordinates <span className="font-mono text-[#263D32]">9.635318, 76.307138</span>.
+            Situated in a quiet, slightly interior residential neighborhood near Kanichukulangara, Alappuzha. Set back from noisy commercial thoroughfares, the villa provides a peaceful green haven while remaining within easy reach of coastal beaches and local landmarks.
           </p>
         </div>
 
@@ -44,10 +27,10 @@ export default function LocationSection() {
           
           {/* Interactive Google Map (7 Cols) */}
           <div className="lg:col-span-7">
-            <div className="rounded-2xl overflow-hidden border border-[#C9AE8C]/50 shadow-xs h-[360px] sm:h-[420px] bg-[#FFFFFF]">
+            <div className="rounded-2xl overflow-hidden border border-[#C9AE8C]/50 shadow-xs h-[360px] sm:h-[440px] bg-[#FFFFFF]">
               <iframe
                 title="Hesil Villa Location Map"
-                src={homestayConfig.contact.googleMapsEmbedUrl}
+                src={contact.googleMapsEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -58,53 +41,70 @@ export default function LocationSection() {
               />
             </div>
             
-            <div className="mt-3 flex flex-wrap items-center justify-between text-xs font-sans text-[#52574E] px-1 gap-2">
-              <span>GPS: 9.635318125878603, 76.307138423238</span>
+            <div className="mt-3 flex items-center justify-between text-xs font-sans text-[#52574E] px-1">
+              <span className="flex items-center gap-1.5 text-[#263D32]">
+                <MapPin className="w-3.5 h-3.5 text-[#71866B]" />
+                <span>Kanichukulangara, Mararikulam North, Alappuzha</span>
+              </span>
               <a
-                href={homestayConfig.contact.googleMapsDirectLink}
+                href={contact.googleMapsDirectLink}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[#263D32] font-semibold underline underline-offset-4 flex items-center gap-1"
+                className="text-[#263D32] hover:text-[#71866B] font-semibold underline underline-offset-4 flex items-center gap-1"
               >
-                <span>Open Pin in Google Maps</span>
+                <span>Open in Google Maps</span>
+                <ExternalLink className="w-3 h-3" />
               </a>
             </div>
           </div>
 
-          {/* Key Transit Routes & Direct Directions (5 Cols) */}
+          {/* Connectivity List (5 Cols) — Place name on LEFT, Distance on RIGHT */}
           <div className="lg:col-span-5 bg-[#FFFFFF] border border-[#C9AE8C]/40 rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
             <div>
-              <h3 className="font-serif text-2xl text-[#263D32] font-normal mb-4">
-                Verified Connectivity
-              </h3>
+              <div className="flex items-center justify-between pb-3 mb-5 border-b border-[#C9AE8C]/30">
+                <h3 className="font-serif text-2xl text-[#263D32] font-normal">
+                  Nearby Attractions
+                </h3>
+                <span className="text-[10px] font-sans uppercase tracking-wider text-[#71866B] font-medium">
+                  Approx. Distance
+                </span>
+              </div>
 
-              <div className="space-y-4 text-xs font-sans">
-                {verifiedDestinations.map((spot, idx) => (
-                  <div key={idx} className="pb-3 border-b border-[#C9AE8C]/20 last:border-b-0">
-                    <span className="font-medium text-[#343831] block">
-                      {spot.name}
-                    </span>
-                    <span className="text-[#71866B] font-light mt-0.5 block">
-                      {spot.detail}
+              {/* Exact requirement: Place name on LEFT and distance on RIGHT */}
+              <div className="space-y-4">
+                {nearbyAttractions.map((spot) => (
+                  <div
+                    key={spot.id}
+                    className="pb-3 border-b border-[#C9AE8C]/20 last:border-b-0 flex items-baseline justify-between gap-4"
+                  >
+                    <div className="text-left">
+                      <span className="font-medium text-xs sm:text-sm text-[#343831] block">
+                        {spot.name}
+                      </span>
+                      <span className="text-[11px] text-[#52574E]/75 font-light block mt-0.5">
+                        {spot.note}
+                      </span>
+                    </div>
+                    
+                    <span className="text-xs sm:text-sm font-semibold text-[#263D32] whitespace-nowrap text-right shrink-0">
+                      {spot.distance}
                     </span>
                   </div>
                 ))}
               </div>
             </div>
 
+            {/* Direct Google Maps Directions Button */}
             <div className="pt-6 mt-6 border-t border-[#C9AE8C]/30">
               <a
-                href={homestayConfig.contact.googleMapsDirectLink}
+                href={contact.googleMapsDirectLink}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full py-3 rounded-full bg-[#263D32] hover:bg-[#1A2B23] text-[#F4F1E7] text-xs font-sans uppercase tracking-wider font-semibold transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-full bg-[#263D32] hover:bg-[#1A2B23] text-[#F4F1E7] text-xs font-sans uppercase tracking-wider font-semibold transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
               >
-                <Navigation className="w-3.5 h-3.5 text-[#C9AE8C]" />
-                <span>Get Route Directions</span>
+                <Navigation className="w-4 h-4 text-[#C9AE8C]" />
+                <span>Get Directions on Google Maps</span>
               </a>
-              <span className="text-[10px] text-center text-[#52574E]/70 block mt-2 font-sans">
-                Calculates real-time driving or auto routes to Hesil Villa
-              </span>
             </div>
           </div>
 
