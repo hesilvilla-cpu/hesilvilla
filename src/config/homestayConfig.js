@@ -127,13 +127,13 @@ export const homestayConfig = {
         "Complimentary breakfast included",
       ],
       // Local image target with reliable fallback
-      image: "/images/upper-suite/upper-suite-bedroom-01.webp",
+      image: "/images/upper-suite/upper bed.webp",
       fallbackImage: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=85",
       isPlaceholder: true,
       gallery: [
-        "/images/upper-suite/upper-suite-bedroom-01.webp",
-        "/images/upper-suite/upper-suite-bedroom-02.webp",
-        "/images/kitchen/kitchen-upstairs-01.webp",
+        "/images/upper-suite/upper extra.webp",
+        "/images/upper-suite/upper washroom.webp",
+        "/images/upper-suite/upper bed.webp",
       ],
       galleryFallbacks: [
         "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80",
@@ -179,8 +179,9 @@ export const homestayConfig = {
       fallbackImage: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1400&q=85",
       isPlaceholder: true,
       gallery: [
-        "/images/lower-suite/lower-suite-bedroom-01.webp",
-        "/images/garden/garden-benches-01.webp",
+        "/images/lower-suite/lowerkitchen.webp",
+        "/images/lower-suite/lowerbathroom.webp",
+        "/images/lower-suite/lowerbed.webp",
       ],
       galleryFallbacks: [
         "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1000&q=80",
@@ -221,13 +222,14 @@ export const homestayConfig = {
         "Air conditioning, Wi-Fi, television, hot water, and power backup",
         "Complimentary breakfast included",
       ],
-      image: "/images/entire-villa/villa-exterior-01.webp",
+      image: "/images/entire-villa/entire1.webp",
       fallbackImage: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85",
       isPlaceholder: true,
       gallery: [
-        "/images/entire-villa/villa-exterior-01.webp",
-        "/images/pond/garden-pond-01.webp",
-        "/images/upper-suite/upper-suite-bedroom-01.webp",
+"/images/entire-villa/lower.webp",
+"/images/entire-villa/sitout.webp",
+"/images/entire-villa/lowerkitchen.webp",
+
       ],
       galleryFallbacks: [
         "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=80",
@@ -269,12 +271,13 @@ export const homestayConfig = {
         "High-speed Wi-Fi & power backup",
         "Complimentary breakfast included",
       ],
-      image: "/images/simple-cottage/simple-cottage-room-01.webp",
+      image: "/images/simple-cottage/simple bed.webp",
       fallbackImage: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1400&q=85",
       isPlaceholder: true,
       gallery: [
-        "/images/simple-cottage/simple-cottage-room-01.webp",
-        "/images/garden/garden-benches-01.webp",
+        "/images/simple-cottage/simple bed 2.webp",
+        "/images/simple-cottage/cottage.webp",
+        "/images/simple-cottage/simple kitchen.webp",
       ],
       galleryFallbacks: [
         "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1000&q=80",
@@ -315,12 +318,13 @@ export const homestayConfig = {
         "High-speed Wi-Fi across the property",
         "Complimentary breakfast included",
       ],
-      image: "/images/solo-cottage/solo-cottage-room-01.webp",
+      image: "/images/simple-cottage/cottage.webp",
       fallbackImage: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=85",
       isPlaceholder: true,
       gallery: [
-        "/images/solo-cottage/solo-cottage-room-01.webp",
-        "/images/garden/garden-trees-01.webp",
+        "/images/solo-cottage/board.webp",
+        "/images/solo-cottage/road.webp",
+        "/images/simple-cottage/cottage.webp",
       ],
       galleryFallbacks: [
         "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=80",
@@ -420,7 +424,7 @@ export const homestayConfig = {
     {
       id: "gal-exterior-01",
       src: "/images/exterior/villa-exterior-01.webp",
-     // fallbackSrc: "/images/exterior/villa-exterior-01.webp",
+      fallbackSrc: "/images/exterior/villa-exterior-01.webp",
       alt: "Villa architecture and enclosed private compound at Hesil Villa",
       category: "Exterior",
       categorySlug: "exterior",
@@ -432,7 +436,7 @@ export const homestayConfig = {
     },
     {
       id: "gal-pond-01",
-      src: "/images/pond/garden-pond-01.webp",
+      src: "/images/exterior/pond.webp",
       fallbackSrc: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85",
       alt: "Garden fish pond and relaxation benches at Hesil Villa",
       category: "Fish Pond",
@@ -471,7 +475,7 @@ export const homestayConfig = {
     },
     {
       id: "gal-simple-01",
-      src: "/images/simple-cottage/simple-cottage-room-01.webp",
+      src: "/images/simple-cottage/simple bed.webp",
       fallbackSrc: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=85",
       alt: "Simple Cottage ground-floor room at Hesil Villa",
       category: "Simple Cottage",
@@ -484,7 +488,7 @@ export const homestayConfig = {
     },
     {
       id: "gal-solo-01",
-      src: "/images/solo-cottage/solo-cottage-room-01.webp",
+      src: "/images/simple-cottage/cottage.webp",
       fallbackSrc: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=85",
       alt: "Solo Cottage bed and hall at Hesil Villa",
       category: "Solo Cottage",
@@ -497,20 +501,20 @@ export const homestayConfig = {
     },
     {
       id: "gal-kitchen-01",
-      src: "/images/kitchen/kitchen-upstairs-01.webp",
+      src: "/images/lower-suite/lowerkitchen.webp",
       fallbackSrc: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=85",
-      alt: "Upstairs kitchen at Hesil Villa",
+      alt: "Kitchen at Hesil Villa",
       category: "Kitchen",
       categorySlug: "kitchen",
-      accommodation: ["upper-suite", "entire-villa"],
-      caption: "The single dedicated kitchen located upstairs (Induction stove usage: ₹200 extra).",
+      accommodation: ["lower-suite", "entire-villa"],
+      caption: "The single dedicated kitchen located lower suite (Induction stove usage: ₹200 extra).",
       featured: false,
       aspect: "landscape",
       isPlaceholder: true,
     },
     {
       id: "gal-benches-01",
-      src: "/images/garden/garden-benches-01.webp",
+      src: "/images/entire-villa/sitout.webp",
       fallbackSrc: "https://images.unsplash.com/photo-1507038772120-7ffe76f79d04?auto=format&fit=crop&w=1200&q=85",
       alt: "Outdoor relaxation benches and table at Hesil Villa",
       category: "Common Areas",
@@ -523,7 +527,7 @@ export const homestayConfig = {
     },
     {
       id: "gal-upper-02",
-      src: "/images/upper-suite/upper-suite-bedroom-02.webp",
+      src: "/images/upper-suite/upper extra.webp",
       fallbackSrc: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=85",
       alt: "Second bedroom in Upper Suite at Hesil Villa",
       category: "Upper Suite",
@@ -536,7 +540,7 @@ export const homestayConfig = {
     },
     {
       id: "gal-garden-trees-01",
-      src: "/images/garden/garden-trees-01.webp",
+      src: "/images/exterior/tree.webp",
       fallbackSrc: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85",
       alt: "Compound garden and mature coconut trees at Hesil Villa",
       category: "Garden",
