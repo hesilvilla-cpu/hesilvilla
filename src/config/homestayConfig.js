@@ -113,11 +113,11 @@ export const homestayConfig = {
         label: "4 guests + up to 2 extra beds",
         summary: "Accommodates 4 guests with up to 2 extra beds (₹400/bed)",
       },
-      bed: "2 Bedrooms Upstairs with King & Queen Beds",
-      layout: "2 AC Bedrooms + 1 Bathroom + Balcony Terrace + Downstairs Kitchen Access",
-      kitchenNote: "Includes access to the ground-floor (downstairs) kitchen",
+      bed: "2 Bedrooms Upstairs with King size Beds",
+      layout: "2 AC Bedrooms + 1 Bathroom + Balcony Terrace",
+      kitchenNote: "Private balcony with tranquil views of the garden and pond.",
       description:
-        "Located on the first floor, the Upper Suite features two air-conditioned bedrooms, a modern bathroom, and an airy balcony terrace overlooking the trees. Guests enjoy access to the ground-floor kitchen (induction stove usage ₹200 extra).",
+        "Located on the first floor, the Upper Suite features two air-conditioned bedrooms, a modern bathroom, and an airy balcony terrace overlooking the trees.",
       highlights: [
         "Two air-conditioned bedrooms upstairs",
         "Access to the ground-floor (downstairs) kitchen",
