@@ -32,7 +32,6 @@ export default function BookingModal({ isOpen, onClose, initialData }) {
     children: '0',
     extraBeds: '0',
     accommodationId: initialMatch?.id || initialData?.accommodationId || 'upper-suite',
-    selectedContactId: 'primary', // 'primary' | 'secondary'
     guestName: '',
     phone: '',
     specialRequests: '',
@@ -70,7 +69,7 @@ export default function BookingModal({ isOpen, onClose, initialData }) {
     }));
   };
 
-  // Date validation
+  // Date validation & correction
   const handleCheckInChange = (newCheckIn) => {
     let newCheckOut = formData.checkOut;
     if (!newCheckOut || newCheckOut <= newCheckIn) {
@@ -143,15 +142,6 @@ export default function BookingModal({ isOpen, onClose, initialData }) {
     });
   };
 
-  // Selected Host Contact
-  const chosenContact = useMemo(() => {
-    return (
-      homestayConfig.contact.phoneList.find(
-        (c) => c.id === formData.selectedContactId
-      ) || homestayConfig.contact.phoneList[0]
-    );
-  }, [formData.selectedContactId]);
-
   // Capacity Guidance
   const capacityInfo = useMemo(() => {
     const std = selectedAccommodation.capacity.standard;
@@ -167,7 +157,7 @@ export default function BookingModal({ isOpen, onClose, initialData }) {
     if (totalGuests > std && extraBedsNum === 0 && maxExtra > 0) {
       return {
         isOverMax: false,
-        message: `Your group of ${totalGuests} exceeds the standard capacity of ${std}. Please select extra bed(s) below (up to ${maxExtra} available at ₹${selectedAccommodation.extraBedCharge}/night).`,
+        message: `Your party of ${totalGuests} exceeds the standard capacity of ${std}. Please select extra bed(s) below (up to ${maxExtra} available at ₹${selectedAccommodation.extraBedCharge}/night).`,
       };
     }
     return null;
@@ -182,49 +172,66 @@ export default function BookingModal({ isOpen, onClose, initialData }) {
       return;
     }
 
-    const { rate, extraBedRate, baseTotal, extraBedTotal, grandTotal } = priceCalculation;
+    const { rate, extraBedRate, extraBedTotal, grandTotal } = priceCalculation;
 
-    const formattedMessage = 
-`*STAY ENQUIRY — HESIL VILLA, ALAPPUZHA*
-----------------------------------------
-*Guest Name:* ${formData.guestName.trim() || 'Guest'}
-${formData.phone.trim() ? `*Contact Phone:* ${formData.phone.trim()}\n` : ''}*Selected Accommodation:* ${selectedAccommodation.name} (${selectedAccommodation.acType})
-*Check-in Date:* ${formData.checkIn} (${formatDateDisplay(formData.checkIn)})
-*Check-out Date:* ${formData.checkOut} (${formatDateDisplay(formData.checkOut)})
-*Duration:* ${nights} ${nights === 1 ? 'Night' : 'Nights'}
-*Guests:* ${adultsNum} Adult${adultsNum > 1 ? 's' : ''}${childrenNum > 0 ? `, ${childrenNum} Child${childrenNum > 1 ? 'ren' : ''}` : ''}
-*Extra Beds Requested:* ${extraBedsNum}
+    // Clean, professionally formatted WhatsApp enquiry message per brief specification
+    const guestName = formData.guestName.trim() || 'Guest';
+    const lines = [
+      'Hello Hesil Villa! 🌿',
+      '',
+      "I'd like to enquire about a stay.",
+      '',
+      '*Guest Details*',
+      `Name: ${guestName}`,
+      `Adults: ${adultsNum}`,
+      `Children: ${childrenNum}`,
+      ...(formData.phone.trim() ? [`Phone: ${formData.phone.trim()}`] : []),
+      '',
+      '*Stay Details*',
+      `Accommodation: ${selectedAccommodation.name} (${selectedAccommodation.acType})`,
+      `Check-in: ${formatDateDisplay(formData.checkIn)}`,
+      `Check-out: ${formatDateDisplay(formData.checkOut)}`,
+      `Duration: ${nights} ${nights === 1 ? 'night' : 'nights'}`,
+      `Extra beds: ${extraBedsNum}`,
+      '',
+      '*Price Estimate*',
+      `Accommodation: ₹${rate.toLocaleString('en-IN')} × ${nights}`,
+      ...(extraBedsNum > 0 ? [`Extra beds: ₹${extraBedTotal.toLocaleString('en-IN')} (${extraBedsNum} bed${extraBedsNum > 1 ? 's' : ''} × ₹${extraBedRate.toLocaleString('en-IN')} × ${nights}N)`] : []),
+      `Estimated total: ₹${grandTotal.toLocaleString('en-IN')}`,
+      ...(formData.specialRequests.trim() ? ['', `Notes: ${formData.specialRequests.trim()}`] : []),
+      '',
+      'Could you please confirm availability and help me with the booking?',
+      '',
+      'Thank you!',
+    ];
 
-*ESTIMATED PRICE BREAKDOWN:*
-- ${selectedAccommodation.name}: ₹${rate.toLocaleString()} × ${nights} ${nights === 1 ? 'night' : 'nights'} = ₹${baseTotal.toLocaleString()}
-${extraBedsNum > 0 ? `- Extra Beds: ₹${extraBedRate.toLocaleString()} × ${extraBedsNum} × ${nights} = ₹${extraBedTotal.toLocaleString()}\n` : ''}- *Estimated Accommodation Total:* ₹${grandTotal.toLocaleString()}
-${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialRequests.trim()}\n` : ''}----------------------------------------
-*Note:* Complimentary breakfast included. Availability and final booking confirmation are subject to confirmation by the host. Looking forward to your response!`;
-
+    const formattedMessage = lines.join('\n');
     const encoded = encodeURIComponent(formattedMessage);
-    window.open(`${chosenContact.whatsappUrl}?text=${encoded}`, '_blank');
+    // Open primary WhatsApp number for all main bookings
+    const targetUrl = `${homestayConfig.contact.primaryWhatsappUrl}?text=${encoded}`;
+    window.open(targetUrl, '_blank');
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/65 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
 
       {/* Modal Dialog Card */}
-      <div className="relative w-full max-w-lg bg-[#FFFFFF] border border-[#C9AE8C]/60 rounded-3xl shadow-xl p-6 sm:p-8 z-10 my-8 animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-lg bg-[#FFFFFF] border border-[#C9AE8C]/60 rounded-3xl shadow-2xl p-5 sm:p-7 z-10 my-6 animate-in fade-in zoom-in-95 duration-200">
         
         {/* Header & Dismiss */}
-        <div className="flex items-start justify-between pb-4 border-b border-[#C9AE8C]/30">
+        <div className="flex items-start justify-between pb-3.5 border-b border-[#C9AE8C]/30">
           <div>
-            <span className="text-[10px] uppercase tracking-widest font-sans font-semibold text-[#71866B] block mb-1">
-              Direct Host Communication
+            <span className="text-[10px] uppercase tracking-widest font-sans font-semibold text-[#71866B] block mb-0.5">
+              Direct Communication
             </span>
             <h3 className="font-serif text-2xl sm:text-3xl text-[#263D32] font-normal">
-              Enquire on WhatsApp
+              WhatsApp Stay Enquiry
             </h3>
           </div>
 
@@ -238,43 +245,19 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmitWhatsApp} className="py-5 space-y-4">
+        <form onSubmit={handleSubmitWhatsApp} className="py-4 space-y-4">
           
-          {/* 1. Host WhatsApp Number Selector */}
+          {/* Group 1: Accommodation Selection */}
           <div>
-            <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1.5">
-              Send Enquiry To
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              {homestayConfig.contact.phoneList.map((contact) => (
-                <button
-                  type="button"
-                  key={contact.id}
-                  onClick={() => setFormData({ ...formData, selectedContactId: contact.id })}
-                  className={`p-2.5 rounded-xl border text-left text-xs font-sans transition-all cursor-pointer ${
-                    formData.selectedContactId === contact.id
-                      ? 'border-[#263D32] bg-[#263D32] text-white shadow-xs'
-                      : 'border-[#C9AE8C]/50 bg-[#F4F1E7] text-[#343831] hover:border-[#263D32]'
-                  }`}
-                >
-                  <span className="block font-semibold text-[11px]">{contact.label}</span>
-                  <span className="text-[10px] opacity-90">{contact.display}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* 2. Accommodation Selection */}
-          <div>
-            <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1.5">
+            <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1">
               Select Accommodation
             </label>
             <select
               value={formData.accommodationId}
               onChange={(e) => handleAccommodationChange(e.target.value)}
-              className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors cursor-pointer"
+              className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors cursor-pointer"
             >
-              <optgroup label="Suites & Entire Villa">
+              <optgroup label="Suites & Entire Villa (AC)">
                 {homestayConfig.accommodations
                   .filter((a) => a.categoryGroup === 'suites')
                   .map((acc) => (
@@ -283,7 +266,7 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
                     </option>
                   ))}
               </optgroup>
-              <optgroup label="Cottages">
+              <optgroup label="Cottages (Non-AC)">
                 {homestayConfig.accommodations
                   .filter((a) => a.categoryGroup === 'cottages')
                   .map((acc) => (
@@ -295,12 +278,12 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
             </select>
           </div>
 
-          {/* 3. Dates Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          {/* Group 2: Dates Row with Validation & Real-time Duration */}
+          <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1.5 flex items-center gap-1">
+              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1 flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5 text-[#71866B]" />
-                <span>Check-in Date</span>
+                <span>Check-in</span>
               </label>
               <input
                 type="date"
@@ -308,14 +291,14 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
                 min={today}
                 value={formData.checkIn}
                 onChange={(e) => handleCheckInChange(e.target.value)}
-                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors"
+                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3 py-2 text-xs sm:text-sm text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1.5 flex items-center gap-1">
+              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1 flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5 text-[#71866B]" />
-                <span>Check-out Date</span>
+                <span>Check-out</span>
               </label>
               <input
                 type="date"
@@ -323,18 +306,18 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
                 min={formData.checkIn ? addDaysToDate(formData.checkIn, 1) : addDaysToDate(today, 1)}
                 value={formData.checkOut}
                 onChange={(e) => handleCheckOutChange(e.target.value)}
-                className={`w-full bg-[#F4F1E7] border rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-[#343831] font-medium focus:outline-none transition-colors ${
+                className={`w-full bg-[#F4F1E7] border rounded-xl px-3 py-2 text-xs sm:text-sm text-[#343831] font-medium focus:outline-none transition-colors ${
                   isDateInvalid ? 'border-red-500 focus:border-red-600' : 'border-[#C9AE8C]/50 focus:border-[#263D32]'
                 }`}
               />
             </div>
           </div>
 
-          {/* Date Summary Banner */}
+          {/* Stay Duration Badge */}
           {!isDateInvalid && nights > 0 ? (
-            <div className="px-3.5 py-2 bg-[#F4F1E7] border border-[#C9AE8C]/40 rounded-xl flex items-center justify-between text-xs font-sans text-[#263D32]">
+            <div className="px-3 py-1.5 bg-[#F4F1E7] border border-[#C9AE8C]/40 rounded-lg flex items-center justify-between text-xs font-sans text-[#263D32]">
               <span>
-                <strong>Stay Duration:</strong> {nights} {nights === 1 ? 'Night' : 'Nights'}
+                <strong>Duration:</strong> {nights} {nights === 1 ? 'Night' : 'Nights'}
               </span>
               <span className="text-[11px] text-[#52574E]">
                 {formatDateDisplay(formData.checkIn)} → {formatDateDisplay(formData.checkOut)}
@@ -347,17 +330,17 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
             </p>
           )}
 
-          {/* 4. Guests & Extra Beds Row */}
+          {/* Group 3: Guests & Extra Beds Row */}
           <div className="grid grid-cols-3 gap-2.5">
             <div>
-              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1.5 flex items-center gap-1">
+              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1 flex items-center gap-1">
                 <Users className="w-3.5 h-3.5 text-[#71866B]" />
                 <span>Adults</span>
               </label>
               <select
                 value={formData.adults}
                 onChange={(e) => setFormData({ ...formData, adults: e.target.value })}
-                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3 py-2 text-xs text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors cursor-pointer"
+                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-2.5 py-2 text-xs text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors cursor-pointer"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
                   <option key={n} value={n}>{n} {n === 1 ? 'Adult' : 'Adults'}</option>
@@ -366,14 +349,14 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
             </div>
 
             <div>
-              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1.5 flex items-center gap-1">
+              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1 flex items-center gap-1">
                 <Users className="w-3.5 h-3.5 text-[#71866B]" />
                 <span>Children</span>
               </label>
               <select
                 value={formData.children}
                 onChange={(e) => setFormData({ ...formData, children: e.target.value })}
-                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3 py-2 text-xs text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors cursor-pointer"
+                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-2.5 py-2 text-xs text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors cursor-pointer"
               >
                 {[0, 1, 2, 3, 4].map((n) => (
                   <option key={n} value={n}>{n} {n === 1 ? 'Child' : 'Children'}</option>
@@ -382,7 +365,7 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
             </div>
 
             <div>
-              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1.5 flex items-center gap-1">
+              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1 flex items-center gap-1">
                 <BedDouble className="w-3.5 h-3.5 text-[#71866B]" />
                 <span>Extra Beds</span>
               </label>
@@ -390,7 +373,7 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
                 value={formData.extraBeds}
                 onChange={(e) => setFormData({ ...formData, extraBeds: e.target.value })}
                 disabled={selectedAccommodation.capacity.maxExtraBeds === 0}
-                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3 py-2 text-xs text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-2.5 py-2 text-xs text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 <option value="0">0 Extra Beds</option>
                 {Array.from({ length: selectedAccommodation.capacity.maxExtraBeds }, (_, i) => i + 1).map((n) => (
@@ -404,7 +387,7 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
 
           {/* Capacity Guidance Note */}
           {capacityInfo && (
-            <div className={`p-3 rounded-xl border text-xs font-sans flex items-start gap-2 ${
+            <div className={`p-2.5 rounded-xl border text-xs font-sans flex items-start gap-2 ${
               capacityInfo.isOverMax
                 ? 'bg-amber-50 border-amber-200 text-amber-900'
                 : 'bg-[#F4F1E7] border-[#C9AE8C]/40 text-[#52574E]'
@@ -414,11 +397,11 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
             </div>
           )}
 
-          {/* 5. Transparent Price Calculation Breakdown */}
+          {/* Group 4: Transparent Price Breakdown Summary */}
           {!isDateInvalid && nights > 0 && (
-            <div className="p-3.5 rounded-2xl bg-[#F4F1E7]/70 border border-[#C9AE8C]/50 space-y-1.5 text-xs font-sans text-[#343831]">
-              <span className="text-[10px] uppercase tracking-wider text-[#71866B] font-semibold block mb-1">
-                Estimated Price Breakdown
+            <div className="p-3 rounded-2xl bg-[#F4F1E7]/80 border border-[#C9AE8C]/50 space-y-1.5 text-xs font-sans text-[#343831]">
+              <span className="text-[10px] uppercase tracking-wider text-[#71866B] font-semibold block mb-0.5">
+                Price Breakdown
               </span>
               <div className="flex justify-between">
                 <span>{selectedAccommodation.name} ({selectedAccommodation.priceDisplay} × {nights} {nights === 1 ? 'night' : 'nights'})</span>
@@ -430,22 +413,22 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
                   <span>₹{priceCalculation.extraBedTotal.toLocaleString()}</span>
                 </div>
               )}
-              <div className="pt-2 border-t border-[#C9AE8C]/30 flex justify-between font-semibold text-sm text-[#263D32]">
+              <div className="pt-1.5 border-t border-[#C9AE8C]/30 flex justify-between font-semibold text-sm text-[#263D32]">
                 <span>Estimated Total</span>
                 <span>₹{priceCalculation.grandTotal.toLocaleString()}</span>
               </div>
-              <span className="block text-[10px] text-[#52574E]/80 pt-1">
-                * Rates are per night. Complimentary breakfast included. Contact host to confirm availability.
+              <span className="block text-[10px] text-[#52574E]/80 pt-0.5">
+                * Rates are per night. Complimentary breakfast included. Advance payment required to confirm reservation.
               </span>
             </div>
           )}
 
-          {/* 6. Guest Name & Phone */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          {/* Group 5: Guest Name & Optional Message */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1.5 flex items-center gap-1">
+              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1 flex items-center gap-1">
                 <User className="w-3.5 h-3.5 text-[#71866B]" />
-                <span>Your Name</span>
+                <span>Your Name *</span>
               </label>
               <input
                 type="text"
@@ -453,55 +436,51 @@ ${formData.specialRequests.trim() ? `\n*Notes / Requests:* ${formData.specialReq
                 placeholder="Full Name"
                 value={formData.guestName}
                 onChange={(e) => setFormData({ ...formData, guestName: e.target.value })}
-                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors"
+                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3 py-2 text-xs sm:text-sm text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1.5 flex items-center gap-1">
+              <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1 flex items-center gap-1">
                 <Phone className="w-3.5 h-3.5 text-[#71866B]" />
-                <span>Phone (Optional)</span>
+                <span>Your Phone (Optional)</span>
               </label>
               <input
                 type="tel"
                 placeholder="+91..."
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors"
+                className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3 py-2 text-xs sm:text-sm text-[#343831] font-medium focus:outline-none focus:border-[#263D32] transition-colors"
               />
             </div>
           </div>
 
-          {/* 7. Optional Notes */}
           <div>
-            <label className="block text-[11px] font-sans font-semibold uppercase tracking-wider text-[#263D32] mb-1.5">
-              Notes or Questions (Optional)
-            </label>
             <textarea
               rows="2"
-              placeholder="e.g. Estimated arrival time, dietary questions, extra bed preferences..."
+              placeholder="Notes or special requests (e.g. arrival time, dietary questions)..."
               value={formData.specialRequests}
               onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
-              className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3.5 py-2 text-xs text-[#343831] focus:outline-none focus:border-[#263D32] transition-colors resize-none"
+              className="w-full bg-[#F4F1E7] border border-[#C9AE8C]/50 rounded-xl px-3 py-2 text-xs text-[#343831] focus:outline-none focus:border-[#263D32] transition-colors resize-none"
             />
           </div>
 
-          {/* Action */}
+          {/* Action Button */}
           <button
             type="submit"
             disabled={isDateInvalid || isGuestCountInvalid}
             className={`w-full py-3.5 rounded-full text-xs font-sans font-semibold uppercase tracking-[0.16em] transition-all duration-300 shadow-xs flex items-center justify-center gap-2 mt-2 ${
               !isDateInvalid && !isGuestCountInvalid
-                ? 'bg-[#263D32] hover:bg-[#1A2B23] text-[#F4F1E7] cursor-pointer'
+                ? 'bg-[#263D32] hover:bg-[#1A2B23] text-[#F4F1E7] cursor-pointer shadow-md hover:shadow-lg'
                 : 'bg-stone-300 text-stone-500 cursor-not-allowed opacity-80'
             }`}
           >
             <MessageCircle className="w-4 h-4 text-emerald-400" />
-            <span>Send Enquiry to {chosenContact.label} ({chosenContact.display})</span>
+            <span>WhatsApp</span>
           </button>
 
           <p className="text-center text-[11px] text-[#52574E]/80 font-sans font-light">
-            * Opens WhatsApp directly with the host. Availability and final confirmation are confirmed by the host.
+            * Availability is subject to host confirmation and advance payment is required to confirm a booking.
           </p>
         </form>
 

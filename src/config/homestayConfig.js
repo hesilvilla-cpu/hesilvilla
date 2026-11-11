@@ -40,7 +40,7 @@ export const homestayConfig = {
     phoneList: [
       {
         id: "primary",
-        label: "Primary Host",
+        label: "WhatsApp",
         phone: "+917510519751",
         display: "+91 75105 19751",
         whatsappUrl: "https://wa.me/917510519751",
@@ -48,7 +48,7 @@ export const homestayConfig = {
       },
       {
         id: "secondary",
-        label: "Secondary Host",
+        label: "Alternative Number",
         phone: "+919497731378",
         display: "+91 94977 31378",
         whatsappUrl: "https://wa.me/919497731378",
@@ -81,7 +81,7 @@ export const homestayConfig = {
     earlyCheckInNote:
       "Early check-in and late check-out may be possible depending on availability. Please contact the host in advance.",
     ratesNotice: "Rates are per night. Contact us to confirm availability.",
-    kitchenNotice: "Basic kitchen amenities available. Induction stove usage: ₹200 extra.",
+    kitchenNotice: "One kitchen located downstairs with basic amenities. Induction stove usage: ₹200 extra.",
   },
 
   // Accommodation Categories
@@ -98,7 +98,7 @@ export const homestayConfig = {
       galleryTag: "upper-suite",
       name: "Upper Suite",
       tagline: "Upstairs Sanctuary with Balcony",
-      subtitle: "First Floor • 2 Bedrooms • AC • One Kitchen Upstairs",
+      subtitle: "First Floor • 2 Bedrooms • AC • Includes Downstairs Kitchen Access",
       floor: "Upstairs (First Floor)",
       acType: "AC",
       isAC: true,
@@ -114,13 +114,13 @@ export const homestayConfig = {
         summary: "Accommodates 4 guests with up to 2 extra beds (₹400/bed)",
       },
       bed: "2 Bedrooms Upstairs with King & Queen Beds",
-      layout: "2 AC Bedrooms + 1 Bathroom + 1 Dedicated Kitchen + Balcony Terrace",
-      kitchenNote: "One kitchen available upstairs for guest use",
+      layout: "2 AC Bedrooms + 1 Bathroom + Balcony Terrace + Downstairs Kitchen Access",
+      kitchenNote: "Includes access to the ground-floor (downstairs) kitchen",
       description:
-        "Located on the first floor, the Upper Suite features two air-conditioned bedrooms, one dedicated kitchen, and an airy balcony terrace overlooking the trees. Perfect for families and groups who appreciate privacy and comfort.",
+        "Located on the first floor, the Upper Suite features two air-conditioned bedrooms, a modern bathroom, and an airy balcony terrace overlooking the trees. Guests enjoy access to the ground-floor kitchen (induction stove usage ₹200 extra).",
       highlights: [
         "Two air-conditioned bedrooms upstairs",
-        "One dedicated kitchen upstairs with basic amenities",
+        "Access to the ground-floor (downstairs) kitchen",
         "Airy balcony terrace overlooking compound trees",
         "Modern bathroom with 24/7 hot water geyser",
         "High-speed Wi-Fi, television & automatic power backup",
@@ -134,6 +134,7 @@ export const homestayConfig = {
         "/images/upper-suite/upper extra.webp",
         "/images/upper-suite/upper washroom.webp",
         "/images/upper-suite/upper bed.webp",
+        "/images/upper-suite/upeerfrmdoor.webp",
       ],
       galleryFallbacks: [
         "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80",
@@ -147,7 +148,7 @@ export const homestayConfig = {
       galleryTag: "lower-suite",
       name: "Lower Suite",
       tagline: "Ground Floor Comfort & Garden Access",
-      subtitle: "Ground Floor • 1 Bedroom • AC • No Separate Kitchen",
+      subtitle: "Ground Floor • 1 Bedroom • AC • No Kitchen Access",
       floor: "Ground Floor",
       acType: "AC",
       isAC: true,
@@ -164,7 +165,7 @@ export const homestayConfig = {
       },
       bed: "1 Ground Floor Bedroom with King Bed",
       layout: "1 AC Bedroom + 1 Ensuite Bathroom + Garden Verandah Access",
-      kitchenNote: "No separate kitchen (Ground floor suite)",
+      kitchenNote: "No kitchen access (Suite only)",
       description:
         "Opening toward the front verandah and garden courtyard, the Lower Suite offers effortless step-free ground living with an air-conditioned bedroom and ensuite bathroom. Ideal for couples or solo travelers seeking quiet comfort.",
       highlights: [
@@ -194,7 +195,7 @@ export const homestayConfig = {
       galleryTag: "entire-villa",
       name: "Entire Villa",
       tagline: "Exclusive Private Compound Buyout",
-      subtitle: "Both Floors Combined • 3 Bedrooms • AC • Includes Upstairs Kitchen",
+      subtitle: "Both Floors Combined • 3 Bedrooms • AC • Includes Downstairs Kitchen",
       floor: "Both Floors (Entire Compound)",
       acType: "AC",
       isAC: true,
@@ -210,13 +211,13 @@ export const homestayConfig = {
         summary: "Accommodates 6 guests with up to 3 extra beds (₹400/bed)",
       },
       bed: "3 AC Bedrooms across 2 Floors (Multiple Beds)",
-      layout: "3 Bedrooms across both floors + Bathrooms + Upstairs Kitchen + Garden & Fish Pond + Parking for 4 Cars",
-      kitchenNote: "Includes full access to the upstairs kitchen",
+      layout: "3 Bedrooms across both floors + Bathrooms + Downstairs Kitchen + Garden & Fish Pond + Parking for 4 Cars",
+      kitchenNote: "Includes access to the ground-floor (downstairs) kitchen",
       description:
-        "Reserve the complete Hesil Villa property for exclusive family vacations, reunion getaways, or friends traveling together. Includes all bedrooms across both floors, the upstairs kitchen, private compound, lush garden, fish pond, outdoor leisure space, and parking for up to four cars.",
+        "Reserve the complete Hesil Villa property for exclusive family vacations, reunion getaways, or friends traveling together. Includes all bedrooms across both floors, the ground-floor kitchen, private compound, lush garden, fish pond, outdoor leisure space, and parking for up to four cars.",
       highlights: [
         "100% exclusive private use of the two-story villa and compound",
-        "Includes the upstairs kitchen for self-catering",
+        "Includes access to the ground-floor (downstairs) kitchen",
         "Private garden with fish pond, benches & games table",
         "Gated compound with boundary wall and parking for up to 4 cars",
         "Air conditioning, Wi-Fi, television, hot water, and power backup",
@@ -386,35 +387,51 @@ export const homestayConfig = {
     { title: "Television", description: "TV setup for relaxed family leisure and entertainment" },
     { title: "Parking for Up to 4 Cars", description: "Secure on-premises parking inside the gated boundary wall" },
     { title: "Complimentary Breakfast", description: "Fresh morning breakfast included for all staying guests" },
-    { title: "One Kitchen Located Upstairs", description: "Basic kitchen amenities available. Induction stove usage: ₹200 extra" },
+    { title: "One Kitchen Located Downstairs", description: "One ground-floor kitchen with basic amenities (Upper Suite & Entire Villa). Induction stove usage: ₹200 extra" },
   ],
 
   // Verified Nearby Attractions & Connectivity
-  // Format: Place name on LEFT, Distance on RIGHT
+  // Authentic coastal, temple, and heritage landmarks in proximity
   nearbyAttractions: [
     {
       id: "att-temple",
       name: "Kanichukulangara Temple",
       distance: "Approx. 1 km",
-      note: "Historic Kerala temple, approximately 1 km away by road.",
+      tag: "Historic Spiritual Landmark",
+      image: "/images/attractions/kanichukulangara.jpg",
+      fallbackImage: "https://images.unsplash.com/photo-1685677260082-dbec4b1303ee?auto=format&fit=crop&w=1200&q=85",
+      description: "A deeply revered traditional Kerala temple dedicated to Goddess Bhagavathy, renowned for its peaceful sacred groves and vibrant cultural heritage.",
+      note: "Approx. 1 km from Hesil Villa.",
     },
     {
       id: "att-harbour",
       name: "Chethy Harbour",
       distance: "Approx. 2 km",
-      note: "Coastal fishing harbour and coastal shoreline.",
+      tag: "Coastal Fishing Harbour",
+      image: "/images/attractions/chethy-harbour.jpg",
+      fallbackImage: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+      description: "A tranquil local fishing harbour along the Arabian Sea where traditional Kerala fishing boats launch daily, offering authentic coastal life and evening sea breezes.",
+      note: "Approx. 2 km from Hesil Villa.",
     },
     {
       id: "att-beach",
       name: "Mararikulam Beach",
       distance: "Approx. 4.5 km",
-      note: "Renowned peaceful white sand beach and coastal walk.",
+      tag: "Pristine Golden Shoreline",
+      image: "/images/attractions/mararikulam-beach.jpg",
+      fallbackImage: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=85",
+      description: "Renowned peaceful white sand beach lined with swaying coconut palms, offering calm waters, tranquil coastal walks, and mesmerizing Arabian Sea sunsets.",
+      note: "Approx. 4.5 km from Hesil Villa.",
     },
     {
       id: "att-church",
       name: "Arthunkal Church and Beach",
       distance: "Approx. 6 km",
-      note: "Historic St. Andrew's Basilica and adjacent coastal beach.",
+      tag: "Historic Coastal Basilica",
+      image: "/images/attractions/arthunkal-church.jpg",
+      fallbackImage: "https://images.unsplash.com/photo-1706940119672-862cdda31ecc?auto=format&fit=crop&w=1200&q=85",
+      description: "Historic St. Andrew's Basilica originally established in the 16th century, leading directly out toward the serene Arthunkal seaside shoreline.",
+      note: "Approx. 6 km from Hesil Villa.",
     },
   ],
 
@@ -430,7 +447,7 @@ export const homestayConfig = {
       categorySlug: "exterior",
       accommodation: ["entire-villa"],
       caption: "Contemporary Kerala villa enclosed within a private boundary wall with tropical trees.",
-      featured: true,
+      featured: false,
       aspect: "landscape",
       isPlaceholder: true,
     },
@@ -449,7 +466,7 @@ export const homestayConfig = {
     },
     {
       id: "gal-upper-01",
-      src: "/images/upper-suite/upper-suite-bedroom-01.webp",
+      src: "/images/upper-suite/upper extra.webp",
       fallbackSrc: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=85",
       alt: "Upper Suite master bedroom at Hesil Villa",
       category: "Upper Suite",
@@ -506,8 +523,8 @@ export const homestayConfig = {
       alt: "Kitchen at Hesil Villa",
       category: "Kitchen",
       categorySlug: "kitchen",
-      accommodation: ["lower-suite", "entire-villa"],
-      caption: "The single dedicated kitchen located lower suite (Induction stove usage: ₹200 extra).",
+      accommodation: ["upper-suite", "entire-villa"],
+      caption: "The single dedicated kitchen located downstairs on the ground floor.",
       featured: false,
       aspect: "landscape",
       isPlaceholder: true,
@@ -538,19 +555,6 @@ export const homestayConfig = {
       aspect: "portrait",
       isPlaceholder: true,
     },
-    {
-      id: "gal-garden-trees-01",
-      src: "/images/exterior/tree.webp",
-      fallbackSrc: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=85",
-      alt: "Compound garden and mature coconut trees at Hesil Villa",
-      category: "Garden",
-      categorySlug: "garden",
-      accommodation: ["entire-villa"],
-      caption: "Lush tropical green foliage and quiet garden courtyard with open space for leisure.",
-      featured: false,
-      aspect: "landscape",
-      isPlaceholder: true,
-    },
   ],
 
   // Verified FAQ (Short and factual per brief)
@@ -573,7 +577,7 @@ export const homestayConfig = {
     {
       question: "What are the kitchen facilities and is there an induction charge?",
       answer:
-        "There is one kitchen in the property, located upstairs with basic amenities (available with Upper Suite and Entire Villa bookings). Usage of the induction stove is ₹200 extra.",
+        "There is only one kitchen at Hesil Villa, located on the ground floor (downstairs) with basic amenities. Kitchen access is provided with the Upper Suite and Entire Villa bookings. Usage of the induction stove is ₹200 extra per stay.",
     },
     {
       question: "What are the check-in and check-out timings?",
@@ -588,7 +592,7 @@ export const homestayConfig = {
     {
       question: "How do I enquire and book?",
       answer:
-        "All enquiries and bookings are handled directly via WhatsApp with the host at +91 75105 19751 or +91 94977 31378 with zero middleman commissions.",
+        "All enquiries and bookings are handled directly via WhatsApp with the host at +91 75105 19751 with zero middleman commissions.",
     },
   ],
 };

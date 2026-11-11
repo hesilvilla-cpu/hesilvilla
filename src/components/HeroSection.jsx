@@ -32,11 +32,6 @@ export default function HeroSection({ onOpenBooking }) {
           loading="eager"
         />
         <div className="absolute inset-0 bg-black/45" />
-
-        {/* Demo image indicator */}
-        <span className="absolute top-24 left-6 z-20 text-[9px] uppercase tracking-wider font-mono px-2.5 py-1 rounded-sm bg-black/60 text-[#F4F1E7]/90 backdrop-blur-xs hidden sm:inline-block">
-          DEMO PHOTOGRAPHY — REPLACE BEFORE LAUNCH
-        </span>
       </div>
 
       {/* Focused Hero Content */}
@@ -71,7 +66,7 @@ export default function HeroSection({ onOpenBooking }) {
             className="w-full sm:w-auto px-7 py-3.5 rounded-full border border-white/60 bg-black/25 hover:bg-white/15 backdrop-blur-xs text-[#F4F1E7] text-xs font-sans uppercase tracking-[0.18em] font-medium transition-colors cursor-pointer flex items-center justify-center gap-2"
           >
             <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Enquire on WhatsApp</span>
+            <span>WhatsApp</span>
           </button>
         </div>
       </div>

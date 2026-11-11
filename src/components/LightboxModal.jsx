@@ -14,8 +14,9 @@ export default function LightboxModal({
   totalCount,
 }) {
   const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
   const touchEndX = useRef(null);
-  const minSwipeDistance = 45; // Pixels required to trigger swipe navigation
+  const minSwipeDistance = 40; // Pixels required to trigger swipe navigation
 
   // Keyboard navigation on desktop
   useEffect(() => {
@@ -42,6 +43,7 @@ export default function LightboxModal({
   const handleTouchStart = (e) => {
     touchEndX.current = null;
     touchStartX.current = e.targetTouches[0].clientX;
+    touchStartY.current = e.targetTouches[0].clientY;
   };
 
   const handleTouchMove = (e) => {
@@ -50,9 +52,9 @@ export default function LightboxModal({
 
   const handleTouchEnd = () => {
     if (!touchStartX.current || !touchEndX.current) return;
-    const distance = touchStartX.current - touchEndX.current;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
+    const distanceX = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distanceX > minSwipeDistance;
+    const isRightSwipe = distanceX < -minSwipeDistance;
 
     if (isLeftSwipe && onNext) {
       onNext();
@@ -63,7 +65,7 @@ export default function LightboxModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md animate-in fade-in duration-200 select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/92 backdrop-blur-md animate-in fade-in duration-200 select-none overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -71,58 +73,55 @@ export default function LightboxModal({
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-5 right-5 z-30 text-white/80 hover:text-white p-2.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
+        className="absolute top-4 right-4 z-40 text-white/80 hover:text-white p-2.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
         aria-label="Close Lightbox (Esc)"
       >
-        <X className="w-6 h-6" />
+        <X className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
 
-      {/* Desktop Previous Button */}
+      {/* Subtle Previous Navigation Control */}
       {hasNavigation && onPrev && (
         <button
           onClick={(e) => {
             e.stopPropagation();
             onPrev();
           }}
-          className="hidden sm:flex absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 text-white/80 hover:text-white p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all cursor-pointer items-center justify-center"
-          aria-label="Previous photograph (Left Arrow)"
+          className="flex absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-30 text-white/80 hover:text-white p-2 sm:p-3 rounded-full bg-black/50 hover:bg-black/75 sm:bg-white/10 sm:hover:bg-white/20 backdrop-blur-xs transition-all cursor-pointer items-center justify-center shadow-lg"
+          aria-label="Previous photograph (Left Arrow or Swipe Right)"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       )}
 
-      {/* Desktop Next Button */}
+      {/* Subtle Next Navigation Control */}
       {hasNavigation && onNext && (
         <button
           onClick={(e) => {
             e.stopPropagation();
             onNext();
           }}
-          className="hidden sm:flex absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 text-white/80 hover:text-white p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all cursor-pointer items-center justify-center"
-          aria-label="Next photograph (Right Arrow)"
+          className="flex absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-30 text-white/80 hover:text-white p-2 sm:p-3 rounded-full bg-black/50 hover:bg-black/75 sm:bg-white/10 sm:hover:bg-white/20 backdrop-blur-xs transition-all cursor-pointer items-center justify-center shadow-lg"
+          aria-label="Next photograph (Right Arrow or Swipe Left)"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       )}
 
       {/* Main Image Container */}
-      <div className="relative max-w-5xl max-h-[90vh] flex flex-col items-center">
+      <div className="relative max-w-5xl max-h-[90vh] flex flex-col items-center px-2">
         <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-black">
           <img
             src={imageSrc}
             alt={title || 'Hesil Villa Photograph'}
-            className="max-h-[75vh] w-auto max-w-full object-contain"
+            className="max-h-[72vh] sm:max-h-[76vh] w-auto max-w-full object-contain"
           />
-          <span className="absolute top-3 left-3 text-[9px] uppercase tracking-wider font-mono px-2 py-0.5 rounded-sm bg-black/70 text-white/90">
-            DEMO IMAGE — REPLACE BEFORE LAUNCH
-          </span>
         </div>
 
         {/* Caption & Counter Bar */}
-        <div className="mt-4 text-center text-white max-w-xl px-4">
+        <div className="mt-3 sm:mt-4 text-center text-white max-w-xl px-4">
           <div className="flex items-center justify-center gap-3">
             {title && (
-              <h4 className="font-serif text-xl sm:text-2xl font-normal text-[#F4F1E7]">
+              <h4 className="font-serif text-lg sm:text-2xl font-normal text-[#F4F1E7]">
                 {title}
               </h4>
             )}
@@ -133,14 +132,14 @@ export default function LightboxModal({
             )}
           </div>
           {caption && (
-            <p className="text-xs font-sans text-[#F4F1E7]/80 font-light mt-1">
+            <p className="text-xs font-sans text-[#F4F1E7]/80 font-light mt-1 max-w-md mx-auto line-clamp-2">
               {caption}
             </p>
           )}
 
           {/* Touch navigation hint on mobile */}
-          <span className="sm:hidden text-[10px] text-white/40 block mt-2 font-sans font-light">
-            Swipe left or right to browse photographs
+          <span className="sm:hidden text-[10px] text-white/50 block mt-1.5 font-sans font-light">
+            Swipe left or right or use arrows to navigate
           </span>
         </div>
       </div>

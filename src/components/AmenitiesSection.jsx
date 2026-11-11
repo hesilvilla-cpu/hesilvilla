@@ -1,87 +1,106 @@
 import React from 'react';
-import { Coffee, Flame, Check } from 'lucide-react';
-import { homestayConfig } from '../config/homestayConfig';
+import { Coffee, Flame, Wifi, Car, Check } from 'lucide-react';
 
 export default function AmenitiesSection() {
-  const { amenities } = homestayConfig;
+  const groupedAmenities = [
+    {
+      group: "Bed & Bath",
+      items: [
+        "Premium bedding, fresh linens & extra blankets",
+        "Firm & soft pillow options",
+        "Fresh bath towels provided for every guest",
+        "Shampoo, conditioner, body wash & hand soap",
+      ],
+    },
+    {
+      group: "Climate & Power",
+      items: [
+        "Air conditioning in applicable suites",
+        "Heating provisions, fans & space heaters where applicable",
+        "24/7 hot water geysers in modern bathrooms",
+        "Automatic inverter power backup for uninterrupted lighting",
+      ],
+    },
+    {
+      group: "Work & Leisure",
+      items: [
+        "High-speed Wi-Fi across the property",
+        "Dedicated workspace table for remote work",
+        "Television setup for relaxed entertainment",
+        "Private parking for up to 4 cars inside gated compound",
+      ],
+    },
+  ];
 
   return (
-    <section className="py-20 md:py-24 bg-[#FFFFFF] text-[#343831] border-b border-[#C9AE8C]/30">
+    <section className="py-16 md:py-20 bg-[#FFFFFF] text-[#343831] border-b border-[#C9AE8C]/30">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         
-        {/* Header */}
-        <div className="text-center max-w-xl mx-auto mb-14">
-          <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#71866B] font-semibold block mb-2">
-            Comforts & Facilities
+        {/* Section Header */}
+        <div className="text-center max-w-xl mx-auto mb-10">
+          <span className="text-[11px] font-sans uppercase tracking-[0.25em] text-[#71866B] font-semibold block mb-1.5">
+            Thoughtful Comforts
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl text-[#263D32] font-normal leading-tight">
-            Confirmed Amenities & Services
+            Amenities & Inclusions
           </h2>
-          <p className="font-sans text-xs sm:text-sm text-[#52574E] font-light mt-2">
-            Verified property features to ensure a peaceful, comfortable stay.
-          </p>
         </div>
 
-        {/* Prominent Complimentary Breakfast Banner */}
-        <div className="mb-12 p-6 rounded-2xl bg-[#263D32] text-[#F4F1E7] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
-          <div className="flex items-center gap-4 text-center sm:text-left">
-            <div className="p-3 rounded-full bg-white/10 text-[#C9AE8C]">
-              <Coffee className="w-6 h-6" />
+        {/* Highlight Banner: Complimentary Breakfast & Key Facilities */}
+        <div className="mb-10 p-5 sm:p-6 rounded-2xl bg-[#F4F1E7] border border-[#C9AE8C]/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5 text-center sm:text-left">
+            <div className="p-2.5 rounded-full bg-[#263D32] text-[#F4F1E7] shrink-0">
+              <Coffee className="w-5 h-5 text-emerald-400" />
             </div>
             <div>
-              <span className="text-[10px] uppercase tracking-widest font-sans font-semibold text-[#C9AE8C] block mb-0.5">
-                Included with Every Stay
-              </span>
-              <h3 className="font-serif text-2xl font-normal text-white">
+              <h3 className="font-serif text-xl sm:text-2xl text-[#263D32] font-normal">
                 Complimentary breakfast included.
               </h3>
-              <p className="text-xs text-[#F4F1E7]/80 font-light mt-0.5">
+              <p className="text-xs text-[#52574E] font-light mt-0.5">
                 Fresh breakfast prepared for all staying guests across suites and cottages.
               </p>
             </div>
           </div>
-          <span className="text-[11px] font-sans uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-white/15 text-[#F4F1E7] font-medium whitespace-nowrap">
-            All Accommodations
-          </span>
+
+          <div className="flex items-center gap-2 text-xs font-sans text-[#263D32] shrink-0 font-medium">
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#C9AE8C]/40">
+              <Wifi className="w-3.5 h-3.5 text-[#71866B]" /> Free Wi-Fi
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#C9AE8C]/40">
+              <Car className="w-3.5 h-3.5 text-[#71866B]" /> 4-Car Parking
+            </span>
+          </div>
         </div>
 
-        {/* 16 Confirmed Amenities Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-x-12 gap-y-6 mb-12">
-          {amenities.map((item, idx) => (
-            <div key={idx} className="flex items-start gap-3 pb-3.5 border-b border-[#C9AE8C]/25">
-              <div className="w-4 h-4 rounded-full bg-[#71866B]/20 text-[#263D32] flex items-center justify-center shrink-0 mt-0.5">
-                <Check className="w-2.5 h-2.5 stroke-[3]" />
-              </div>
-              <div>
-                <h4 className="font-serif text-base sm:text-lg text-[#263D32] font-normal leading-snug">
-                  {item.title}
-                </h4>
-                <p className="text-xs text-[#52574E] font-light leading-relaxed mt-0.5">
-                  {item.description}
-                </p>
-              </div>
+        {/* 3 Compact Columns of Grouped Facilities */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+          {groupedAmenities.map((col, idx) => (
+            <div key={idx} className="space-y-3">
+              <h4 className="font-serif text-lg text-[#263D32] font-normal pb-2 border-b border-[#C9AE8C]/30">
+                {col.group}
+              </h4>
+              <ul className="space-y-2 text-xs font-sans text-[#52574E] font-light">
+                {col.items.map((item, itemIdx) => (
+                  <li key={itemIdx} className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-[#71866B] shrink-0 mt-0.5 stroke-[2.5]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
 
-        {/* Kitchen Facilities Notice Card */}
-        <div className="bg-[#F4F1E7] border border-[#C9AE8C]/40 rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-start gap-3.5">
-            <div className="p-2.5 rounded-full bg-white text-[#71866B] shrink-0 mt-0.5">
-              <Flame className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-serif text-xl text-[#263D32] font-normal mb-1">
-                Kitchen Facilities & Induction Stove
-              </h4>
-              <p className="text-xs font-sans text-[#52574E] font-light leading-relaxed">
-                There is one kitchen upstairs with basic amenities (available with Upper Suite and Entire Villa bookings).
-                <strong className="text-[#263D32] block sm:inline sm:ml-1">Basic kitchen amenities available. Induction stove usage: ₹200 extra.</strong>
-              </p>
-            </div>
+        {/* Accurate Kitchen Notice Pill */}
+        <div className="p-4 rounded-xl bg-[#FFFFFF] border border-[#C9AE8C]/50 text-xs font-sans text-[#52574E] flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-2xs">
+          <div className="flex items-center gap-2">
+            <Flame className="w-4 h-4 text-[#71866B] shrink-0" />
+            <span>
+              <strong>Kitchen Policy:</strong> There is only one kitchen at Hesil Villa, located on the ground floor (downstairs) with basic amenities (available with Upper Suite & Entire Villa).
+            </span>
           </div>
-          <span className="text-[11px] font-sans uppercase tracking-wider text-[#71866B] font-semibold bg-white/80 px-3 py-1 rounded-full border border-[#C9AE8C]/30 shrink-0">
-            ₹200 Extra for Induction
+          <span className="text-[11px] font-semibold text-[#263D32] whitespace-nowrap bg-[#F4F1E7] px-2.5 py-1 rounded-md border border-[#C9AE8C]/30">
+            Induction stove usage: ₹200 extra
           </span>
         </div>
 

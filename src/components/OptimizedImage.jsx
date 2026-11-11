@@ -5,7 +5,6 @@ import React, { useState } from 'react';
  * - Renders responsive images with graceful fallback
  * - Handles missing local files gracefully via onError
  * - Never shows broken image icons
- * - Supports dev placeholder badges
  */
 export default function OptimizedImage({
   src,
@@ -13,35 +12,28 @@ export default function OptimizedImage({
   alt = 'Hesil Villa',
   className = '',
   loading = 'lazy',
-  showPlaceholderBadge = false,
-  badgeText = 'DEMO IMAGE — REPLACE BEFORE LAUNCH',
   onClick,
 }) {
-  const [imgSrc, setImgSrc] = useState(src);
-  const [hasError, setHasError] = useState(false);
+  const [failedSrcs, setFailedSrcs] = useState({});
+
+  const hasFailed = failedSrcs[src];
+  const activeSrc = hasFailed && fallbackSrc ? fallbackSrc : src;
 
   const handleError = () => {
-    if (!hasError && fallbackSrc && imgSrc !== fallbackSrc) {
-      setImgSrc(fallbackSrc);
-      setHasError(true);
+    if (!hasFailed && fallbackSrc) {
+      setFailedSrcs((prev) => ({ ...prev, [src]: true }));
     }
   };
 
   return (
-    <div className={`relative overflow-hidden ${className}`} onClick={onClick}>
+    <div className={`relative overflow-hidden w-full h-full ${className}`} onClick={onClick}>
       <img
-        src={imgSrc}
+        src={activeSrc}
         alt={alt}
         loading={loading}
         onError={handleError}
-        className="w-full h-full object-cover object-center transition-transform duration-700"
+        className="w-full h-full object-cover object-center transition-transform duration-700 block"
       />
-
-      {showPlaceholderBadge && (
-        <span className="absolute top-3 left-3 z-20 text-[8px] sm:text-[9px] uppercase tracking-wider font-mono px-2 py-0.5 rounded-sm bg-black/65 text-[#F4F1E7] backdrop-blur-xs select-none pointer-events-none">
-          {badgeText}
-        </span>
-      )}
     </div>
   );
 }
