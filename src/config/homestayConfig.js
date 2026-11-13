@@ -98,7 +98,7 @@ export const homestayConfig = {
       galleryTag: "upper-suite",
       name: "Upper Suite",
       tagline: "Upstairs Sanctuary with Balcony",
-      subtitle: "First Floor • 2 Bedrooms • AC • Includes Downstairs Kitchen Access",
+      subtitle: "First Floor • 2 Bedrooms • AC",
       floor: "Upstairs (First Floor)",
       acType: "AC",
       isAC: true,
@@ -120,7 +120,6 @@ export const homestayConfig = {
         "Located on the first floor, the Upper Suite features two air-conditioned bedrooms, a modern bathroom, and an airy balcony terrace overlooking the trees.",
       highlights: [
         "Two air-conditioned bedrooms upstairs",
-        "Access to the ground-floor (downstairs) kitchen",
         "Airy balcony terrace overlooking compound trees",
         "Modern bathroom with 24/7 hot water geyser",
         "High-speed Wi-Fi, television & automatic power backup",
@@ -148,7 +147,7 @@ export const homestayConfig = {
       galleryTag: "lower-suite",
       name: "Lower Suite",
       tagline: "Ground Floor Comfort & Garden Access",
-      subtitle: "Ground Floor • 1 Bedroom • AC • No Kitchen Access",
+      subtitle: "Ground Floor • 1 Bedroom • AC • Kitchen Access",
       floor: "Ground Floor",
       acType: "AC",
       isAC: true,
@@ -165,7 +164,7 @@ export const homestayConfig = {
       },
       bed: "1 Ground Floor Bedroom with King Bed",
       layout: "1 AC Bedroom + 1 Ensuite Bathroom + Garden Verandah Access",
-      kitchenNote: "No kitchen access (Suite only)",
+      kitchenNote: "Kitchen access also",
       description:
         "Opening toward the front verandah and garden courtyard, the Lower Suite offers effortless step-free ground living with an air-conditioned bedroom and ensuite bathroom. Ideal for couples or solo travelers seeking quiet comfort.",
       highlights: [
